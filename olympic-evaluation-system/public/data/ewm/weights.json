@@ -1,0 +1,27 @@
+{
+  "calculated": "2026-03-18",
+  "entropyValues": {
+    "popularity": 0.923,
+    "gender_equity": 0.891,
+    "sustainability": 0.912,
+    "inclusivity": 0.905,
+    "innovation": 0.878,
+    "safety": 0.901
+  },
+  "weights": {
+    "popularity": 0.18,
+    "gender_equity": 0.25,
+    "sustainability": 0.20,
+    "inclusivity": 0.22,
+    "innovation": 0.28,
+    "safety": 0.23
+  },
+  "normalizedWeights": {
+    "popularity": 0.139,
+    "gender_equity": 0.193,
+    "sustainability": 0.154,
+    "inclusivity": 0.170,
+    "innovation": 0.216,
+    "safety": 0.178
+  }
+}

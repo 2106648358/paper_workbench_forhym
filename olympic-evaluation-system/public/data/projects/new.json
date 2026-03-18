@@ -1,0 +1,90 @@
+{
+  "category": "new",
+  "description": "奥运会新增项目（2020年后）",
+  "projects": [
+    {
+      "id": "sport_climbing",
+      "name": "攀岩",
+      "nameEn": "Sport Climbing",
+      "yearAdded": 2020,
+      "indicators": {
+        "popularity": 0.68,
+        "gender_equity": 0.90,
+        "sustainability": 0.60,
+        "inclusivity": 0.35,
+        "innovation": 0.95,
+        "safety": 0.85
+      }
+    },
+    {
+      "id": "surfing",
+      "name": "冲浪",
+      "nameEn": "Surfing",
+      "yearAdded": 2020,
+      "indicators": {
+        "popularity": 0.65,
+        "gender_equity": 0.90,
+        "sustainability": 0.85,
+        "inclusivity": 0.25,
+        "innovation": 0.90,
+        "safety": 0.80
+      }
+    },
+    {
+      "id": "skateboarding",
+      "name": "滑板",
+      "nameEn": "Skateboarding",
+      "yearAdded": 2020,
+      "indicators": {
+        "popularity": 0.72,
+        "gender_equity": 0.90,
+        "sustainability": 0.70,
+        "inclusivity": 0.40,
+        "innovation": 0.98,
+        "safety": 0.35
+      }
+    },
+    {
+      "id": "breaking",
+      "name": "霹雳舞",
+      "nameEn": "Breaking",
+      "yearAdded": 2024,
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.92,
+        "sustainability": 0.90,
+        "inclusivity": 0.45,
+        "innovation": 1.0,
+        "safety": 0.70
+      }
+    },
+    {
+      "id": "rugby_sevens",
+      "name": "七人制橄榄球",
+      "nameEn": "Rugby Sevens",
+      "yearAdded": 2016,
+      "indicators": {
+        "popularity": 0.65,
+        "gender_equity": 0.88,
+        "sustainability": 0.75,
+        "inclusivity": 0.70,
+        "innovation": 0.65,
+        "safety": 0.45
+      }
+    },
+    {
+      "id": "golf",
+      "name": "高尔夫",
+      "nameEn": "Golf",
+      "yearAdded": 2016,
+      "indicators": {
+        "popularity": 0.70,
+        "gender_equity": 0.85,
+        "sustainability": 0.35,
+        "inclusivity": 0.40,
+        "innovation": 0.30,
+        "safety": 0.85
+      }
+    }
+  ]
+}
