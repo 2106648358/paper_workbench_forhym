@@ -1,0 +1,282 @@
+% 第三章：混合权重评估模型构建
+% 论文初稿（修订版）- 添加文献引用
+
+\section{混合权重评估模型构建}
+\label{sec:model}
+
+本章将奥运项目评估问题抽象为多准则决策问题，构建基于 AHP-EWM 的混合权重评估模型。首先建立六维评价指标体系，然后分别推导 AHP 主观权重和 EWM 客观权重的计算方法，最后提出混合权重组合策略。
+
+\subsection{问题数学化建模}
+\label{subsec:problem}
+
+\subsubsection{多准则决策问题定义}
+
+多准则决策（Multi-Criteria Decision Making, MCDM）是决策科学的重要分支，用于解决具有多个相互冲突准则的决策问题\cite{zeleny1982multiple}。奥运项目评估本质上是一个多准则决策问题。
+
+设：
+\begin{itemize}
+    \item 备选项目集合 $S = \{s_1, s_2, \ldots, s_n\}$，其中 $n$ 为候选运动项目数量
+    \item 评价指标集合 $C = \{c_1, c_2, \ldots, c_m\}$，其中 $m$ 为评价指标数量，本研究中 $m = 6$
+    \item 决策矩阵 $X = [x_{ij}]_{n \times m}$，其中 $x_{ij}$ 表示项目 $i$ 在指标 $j$ 上的原始数据值
+\end{itemize}
+
+研究目标是确定最优权重向量 $W = (w_1, w_2, \ldots, w_m)$，使得综合评分向量 $V = (v_1, v_2, \ldots, v_n)$ 能够合理反映各项目的优劣。综合评分计算公式为：
+\begin{equation}
+    v_i = \sum_{j=1}^{m} w_j \cdot \tilde{x}_{ij}
+    \label{eq:score}
+\end{equation}
+其中 $\tilde{x}_{ij}$ 是标准化后的指标值。
+
+\subsubsection{六维评价指标体系}
+
+基于国际奥委会的评估标准，本研究参考 Song 等\cite{song2025quantifying} 提出的指标框架，构建六维评价指标体系，如表~\ref{tab:indicators} 所示。
+
+Song 等\cite{song2025quantifying} 在研究中总结了 IOC 对新项目评估的核心标准，包括流行度、性别平等、可持续性、包容性、创新性和安全性六个维度。李凤梅\cite{li2013xiaji} 从人文取向、经济价值、社会属性等角度分析了奥运项目设置标准，为本研究提供了重要的理论参考。
+
+\begin{table}[htbp]
+    \centering
+    \caption{六维评价指标体系}
+    \label{tab:indicators}
+    \begin{tabular}{clll}
+        \toprule
+        编号 & 指标名称 & 英文 & 说明 \\
+        \midrule
+        $c_1$ & 流行度 & Popularity & 观众收视率、参与人数 \\
+        $c_2$ & 性别平等 & Gender Equity & 男女参赛比例 \\
+        $c_3$ & 可持续性 & Sustainability & 碳排放、资源消耗 \\
+        $c_4$ & 包容性 & Inclusivity & 发展中国家参与度 \\
+        $c_5$ & 创新性 & Innovation & 新项目引入频率 \\
+        $c_6$ & 安全性 & Safety & 受伤率 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{AHP 主观权重计算模型}
+\label{subsec:ahp}
+
+层次分析法（Analytic Hierarchy Process, AHP）由 Saaty\cite{saaty2007analytic} 提出，是一种将复杂决策问题层次化、定量化的系统分析方法。
+
+\subsubsection{判断矩阵构建}
+
+AHP 通过构建判断矩阵来量化专家对指标重要性的主观判断。判断矩阵 $A$ 是一个 $m \times m$ 的正互反矩阵\cite{saaty2007analytic}：
+\begin{equation}
+    A = [a_{ij}]_{m \times m}
+    \label{eq:jm}
+\end{equation}
+
+判断矩阵满足以下性质：
+\begin{enumerate}
+    \item \textbf{正互反性}：$a_{ij} > 0$，$a_{ji} = \frac{1}{a_{ij}}$，$a_{ii} = 1$
+    \item \textbf{一致性}（理想情况）：$a_{ik} = a_{ij} \cdot a_{jk}$，$\forall i, j, k$
+\end{enumerate}
+
+本研究采用 Saaty\cite{saaty2007analytic} 提出的 1-9 标度法。Saaty 指出，人类区分信息等级的能力约为 7$\pm$2 个等级，因此采用 1-9 的标度范围符合人类认知特点。
+
+\subsubsection{特征值法求权重}
+
+对于判断矩阵 $A$，权重向量 $W$ 通过求解以下特征值问题得到\cite{saaty2007analytic}：
+\begin{equation}
+    AW = \lambda_{\max} W
+    \label{eq:eigen}
+\end{equation}
+其中 $\lambda_{\max}$ 是矩阵 $A$ 的最大特征值。
+
+\textbf{理论推导}：
+
+Saaty\cite{saaty2007analytic} 证明了：对于完全一致的判断矩阵，存在权重向量 $W$ 使得：
+\begin{equation}
+    a_{ij} = \frac{w_i}{w_j}
+    \label{eq:consistent}
+\end{equation}
+
+因此：
+\begin{equation}
+    \sum_{j=1}^{m} a_{ij} w_j = \sum_{j=1}^{m} \frac{w_i}{w_j} w_j = m \cdot w_i
+\end{equation}
+
+写成矩阵形式：$AW = mW$。根据 Perron-Frobenius 定理，正矩阵存在唯一的正实特征值，对应的特征向量所有分量为正。
+
+实际判断矩阵往往不完全一致，此时 $\lambda_{\max} \geq m$\cite{saaty2007analytic}，取最大特征值对应的特征向量归一化后作为权重：
+\begin{equation}
+    W = \frac{v_{\max}}{\|v_{\max}\|_1}
+    \label{eq:weight_norm}
+\end{equation}
+
+\subsubsection{一致性检验}
+
+为了检验判断矩阵的一致性，Saaty\cite{saaty2007analytic} 定义了一致性指标（Consistency Index, CI）：
+\begin{equation}
+    CI = \frac{\lambda_{\max} - m}{m - 1}
+    \label{eq:ci}
+\end{equation}
+
+引入平均随机一致性指标（Random Index, RI）。Song 等\cite{song2025quantifying} 在研究中给出了完整的 RI 表，如表~\ref{tab:ri} 所示。
+
+\begin{table}[htbp]
+    \centering
+    \caption{平均随机一致性指标 RI\cite{song2025quantifying}}
+    \label{tab:ri}
+    \begin{tabular}{cccccccc}
+        \toprule
+        $n$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+        \midrule
+        $RI$ & 0.52 & 0.89 & 1.12 & 1.26 & 1.36 & 1.41 & 1.46 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+定义一致性比率（Consistency Ratio, CR）：
+\begin{equation}
+    CR = \frac{CI}{RI}
+    \label{eq:cr}
+\end{equation}
+
+Saaty\cite{saaty2007analytic} 建议：当 $CR < 0.1$ 时，判断矩阵通过一致性检验；否则需要调整判断矩阵。
+
+\subsection{EWM 客观权重计算模型}
+\label{subsec:ewm}
+
+熵权法（Entropy Weight Method, EWM）是一种基于信息熵的客观赋权方法。信息熵的概念源于 Shannon\cite{shannon1948mathematical} 的信息论，用于度量信息的不确定性。
+
+\subsubsection{信息熵理论基础}
+
+Shannon\cite{shannon1948mathematical} 定义了离散随机变量的信息熵：
+\begin{equation}
+    H(X) = -\sum_{i=1}^{n} p_i \ln p_i
+    \label{eq:shannon_entropy}
+\end{equation}
+
+信息熵具有以下性质：
+\begin{enumerate}
+    \item 非负性：$H(X) \geq 0$
+    \item 极值性：当某状态概率为 1 时，$H(X) = 0$；当所有状态等概率时，$H(X) = \ln n$（最大熵）
+\end{enumerate}
+
+\subsubsection{数据标准化}
+
+Wang 和 Liu\cite{wang2019comprehensive} 在海洋软实力评估中详细阐述了熵权法的应用步骤。首先对决策矩阵进行标准化处理。
+
+对于正向指标（越大越好）：
+\begin{equation}
+    \tilde{x}_{ij} = \frac{x_{ij} - \min_i x_{ij}}{\max_i x_{ij} - \min_i x_{ij}}
+    \label{eq:norm_pos}
+\end{equation}
+
+对于负向指标（越小越好）：
+\begin{equation}
+    \tilde{x}_{ij} = \frac{\max_i x_{ij} - x_{ij}}{\max_i x_{ij} - \min_i x_{ij}}
+    \label{eq:norm_neg}
+\end{equation}
+
+\subsubsection{信息熵计算}
+
+计算各指标的信息熵。首先计算比重\cite{wang2019comprehensive}：
+\begin{equation}
+    p_{ij} = \frac{\tilde{x}_{ij}}{\sum_{i=1}^{n} \tilde{x}_{ij}}
+    \label{eq:pij}
+\end{equation}
+
+信息熵定义为：
+\begin{equation}
+    H_j = -\frac{1}{\ln n} \sum_{i=1}^{n} p_{ij} \ln p_{ij}
+    \label{eq:entropy}
+\end{equation}
+其中当 $p_{ij} = 0$ 时，定义 $p_{ij} \ln p_{ij} = 0$。
+
+陈家金等\cite{chen2016fujian} 指出：信息熵 $H_j$ 越大，表示指标 $j$ 下各方案数据差异越小，该指标提供的信息量越小；反之，$H_j$ 越小，指标提供的信息量越大。
+
+\subsubsection{熵权求解}
+
+定义信息效用值\cite{wang2019comprehensive}：
+\begin{equation}
+    D_j = 1 - H_j
+    \label{eq:dj}
+\end{equation}
+
+熵权计算公式为\cite{shang2009chengshi}：
+\begin{equation}
+    w_j^{EWM} = \frac{D_j}{\sum_{j=1}^{m} D_j} = \frac{1 - H_j}{\sum_{j=1}^{m} (1 - H_j)}
+    \label{eq:ewm_weight}
+\end{equation}
+
+\subsection{混合权重组合策略}
+\label{subsec:hybrid}
+
+\subsubsection{线性组合模型}
+
+Zhang 等\cite{zhang2023risk} 指出，AHP 反映专家的主观判断，EWM 反映数据的客观差异，两者结合可以提供更全面、可靠的权重结果。本研究提出 AHP-EWM 混合权重模型，采用线性组合方式：
+\begin{equation}
+    W = \alpha \cdot W_{AHP} + (1 - \alpha) \cdot W_{EWM}
+    \label{eq:hybrid}
+\end{equation}
+其中 $\alpha \in [0, 1]$ 为组合系数。
+
+\textbf{理论依据}：
+
+侯国林和黄震方\cite{hou2010lvyou} 在旅游地评估研究中验证了熵权层次分析组合方法的有效性。线性组合满足凸组合性质，保证混合权重满足归一化条件：
+\begin{equation}
+    \sum_{j=1}^{m} w_j = \alpha \sum_{j=1}^{m} w_j^{AHP} + (1 - \alpha) \sum_{j=1}^{m} w_j^{EWM} = 1
+\end{equation}
+
+\subsubsection{组合系数确定}
+
+本研究采用灵敏度分析法确定组合系数 $\alpha$：
+
+\begin{enumerate}
+    \item 设定 $\alpha$ 的取值范围，如 $\alpha \in \{0.1, 0.2, \ldots, 0.9\}$
+    \item 对每个 $\alpha$ 值计算混合权重和综合评分排序
+    \item 分析排序结果的稳定性
+    \item 选择结果最稳定的 $\alpha$ 值或 $\alpha$ 范围
+\end{enumerate}
+
+\subsubsection{混合权重的数学性质}
+
+\textbf{性质 1（有界性）}：
+\begin{equation}
+    \min(w_j^{AHP}, w_j^{EWM}) \leq w_j \leq \max(w_j^{AHP}, w_j^{EWM})
+\end{equation}
+
+\textbf{性质 2（单调性）}：
+\begin{equation}
+    \frac{\partial w_j}{\partial \alpha} = w_j^{AHP} - w_j^{EWM}
+\end{equation}
+当 $\alpha$ 增大时，混合权重向 AHP 权重靠近。
+
+\textbf{性质 3（凸组合）}：混合权重是 AHP 权重和 EWM 权重的凸组合，保证了权重的合理性和稳定性。
+
+\subsection{模型有效性分析}
+\label{subsec:validity}
+
+\subsubsection{与传统方法的对比}
+
+Song 等\cite{song2025quantifying} 采用 AHP + PCA + KNN 方法进行奥运项目选择。本研究采用 AHP + EWM 混合权重方法，两者各有优势：
+
+\begin{table}[htbp]
+    \centering
+    \caption{权重确定方法对比}
+    \label{tab:comparison}
+    \begin{tabular}{lccc}
+        \toprule
+        方法 & 主观性 & 客观性 & 适用场景 \\
+        \midrule
+        纯 AHP & 高 & 低 & 专家经验丰富 \\
+        纯 EWM & 低 & 高 & 数据充分可靠 \\
+        混合模型 & 中 & 中 & 综合决策场景 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Li 等\cite{li2025evaluation} 在环境质量评估中验证了 AHP-EWM 方法的有效性，表明混合权重能够同时考虑主观判断和客观数据。
+
+\subsubsection{模型优势}
+
+\begin{enumerate}
+    \item 兼顾主客观因素，决策结果更加全面
+    \item 通过灵敏度分析可以验证结果的稳健性
+    \item 数学推导严谨，理论依据充分
+\end{enumerate}
+
+\subsection{本章小结}
+\label{subsec:summary}
+
+本章构建了基于 AHP-EWM 的混合权重评估模型。首先将奥运项目评估问题抽象为多准则决策问题，建立了六维评价指标体系。然后分别推导了 AHP 主观权重\cite{saaty2007analytic}和 EWM 客观权重\cite{wang2019comprehensive}的计算方法，包括判断矩阵构建、特征值法求权重、一致性检验、信息熵计算等核心步骤。最后提出了线性组合的混合权重模型\cite{zhang2023risk}，并分析了其数学性质和有效性。下一章将通过实验验证该模型的实际应用效果。
