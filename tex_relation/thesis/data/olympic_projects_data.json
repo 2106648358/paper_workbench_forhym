@@ -1,0 +1,217 @@
+{
+  "description": "奥运项目评估示例数据集 (2000-2024)",
+  "note": "此为模拟数据，用于演示模型计算流程",
+  "projects": [
+    {
+      "name": "田径",
+      "year_added": 1896,
+      "status": "core",
+      "indicators": {
+        "popularity": 0.95,
+        "gender_equity": 0.92,
+        "sustainability": 0.75,
+        "inclusivity": 0.88,
+        "innovation": 0.45,
+        "safety": 0.70
+      }
+    },
+    {
+      "name": "游泳",
+      "year_added": 1896,
+      "status": "core",
+      "indicators": {
+        "popularity": 0.92,
+        "gender_equity": 0.95,
+        "sustainability": 0.72,
+        "inclusivity": 0.85,
+        "innovation": 0.55,
+        "safety": 0.75
+      }
+    },
+    {
+      "name": "体操",
+      "year_added": 1896,
+      "status": "core",
+      "indicators": {
+        "popularity": 0.88,
+        "gender_equity": 0.90,
+        "sustainability": 0.68,
+        "inclusivity": 0.70,
+        "innovation": 0.60,
+        "safety": 0.55
+      }
+    },
+    {
+      "name": "篮球",
+      "year_added": 1936,
+      "status": "core",
+      "indicators": {
+        "popularity": 0.93,
+        "gender_equity": 0.88,
+        "sustainability": 0.70,
+        "inclusivity": 0.82,
+        "innovation": 0.50,
+        "safety": 0.72
+      }
+    },
+    {
+      "name": "足球",
+      "year_added": 1900,
+      "status": "core",
+      "indicators": {
+        "popularity": 0.98,
+        "gender_equity": 0.85,
+        "sustainability": 0.65,
+        "inclusivity": 0.90,
+        "innovation": 0.40,
+        "safety": 0.68
+      }
+    },
+    {
+      "name": "攀岩",
+      "year_added": 2020,
+      "status": "new",
+      "indicators": {
+        "popularity": 0.78,
+        "gender_equity": 0.85,
+        "sustainability": 0.80,
+        "inclusivity": 0.65,
+        "innovation": 0.92,
+        "safety": 0.60
+      }
+    },
+    {
+      "name": "冲浪",
+      "year_added": 2020,
+      "status": "new",
+      "indicators": {
+        "popularity": 0.75,
+        "gender_equity": 0.88,
+        "sustainability": 0.82,
+        "inclusivity": 0.55,
+        "innovation": 0.90,
+        "safety": 0.65
+      }
+    },
+    {
+      "name": "滑板",
+      "year_added": 2020,
+      "status": "new",
+      "indicators": {
+        "popularity": 0.82,
+        "gender_equity": 0.80,
+        "sustainability": 0.78,
+        "inclusivity": 0.60,
+        "innovation": 0.95,
+        "safety": 0.55
+      }
+    },
+    {
+      "name": "霹雳舞",
+      "year_added": 2024,
+      "status": "new",
+      "indicators": {
+        "popularity": 0.70,
+        "gender_equity": 0.82,
+        "sustainability": 0.85,
+        "inclusivity": 0.58,
+        "innovation": 0.98,
+        "safety": 0.70
+      }
+    },
+    {
+      "name": "电子竞技",
+      "year_added": null,
+      "status": "candidate",
+      "indicators": {
+        "popularity": 0.95,
+        "gender_equity": 0.75,
+        "sustainability": 0.90,
+        "inclusivity": 0.70,
+        "innovation": 0.98,
+        "safety": 0.80
+      }
+    },
+    {
+      "name": "匹克球",
+      "year_added": null,
+      "status": "candidate",
+      "indicators": {
+        "popularity": 0.68,
+        "gender_equity": 0.90,
+        "sustainability": 0.85,
+        "inclusivity": 0.75,
+        "innovation": 0.85,
+        "safety": 0.85
+      }
+    },
+    {
+      "name": "板球",
+      "year_added": null,
+      "status": "candidate",
+      "indicators": {
+        "popularity": 0.85,
+        "gender_equity": 0.78,
+        "sustainability": 0.70,
+        "inclusivity": 0.65,
+        "innovation": 0.45,
+        "safety": 0.72
+      }
+    },
+    {
+      "name": "壁球",
+      "year_added": null,
+      "status": "candidate",
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.85,
+        "sustainability": 0.80,
+        "inclusivity": 0.60,
+        "innovation": 0.50,
+        "safety": 0.75
+      }
+    },
+    {
+      "name": "空手道",
+      "year_added": 2020,
+      "status": "removed_2024",
+      "indicators": {
+        "popularity": 0.65,
+        "gender_equity": 0.82,
+        "sustainability": 0.75,
+        "inclusivity": 0.55,
+        "innovation": 0.60,
+        "safety": 0.50
+      }
+    },
+    {
+      "name": "棒球/垒球",
+      "year_added": 1992,
+      "status": "removed_2008_returned_2020",
+      "indicators": {
+        "popularity": 0.72,
+        "gender_equity": 0.75,
+        "sustainability": 0.65,
+        "inclusivity": 0.70,
+        "innovation": 0.35,
+        "safety": 0.70
+      }
+    }
+  ],
+  "indicator_definitions": {
+    "popularity": "流行度 - 收视率、参与人数、社交媒体讨论度综合评分",
+    "gender_equity": "性别平等 - 男女参赛比例均衡度",
+    "sustainability": "可持续性 - 碳排放、场馆成本等综合评分（越高越可持续）",
+    "inclusivity": "包容性 - 残奥关联、发展中国家参与度",
+    "innovation": "创新性 - 年轻化程度、技术革新、新近加入程度",
+    "safety": "安全性 - 受伤率反向评分（越高越安全）"
+  },
+  "data_sources": {
+    "popularity": ["IOC Reports", "Nielsen", "Social Media APIs"],
+    "gender_equity": ["IOC Official Reports", "Historical Data"],
+    "sustainability": ["IOC Sustainability Reports", "Academic Literature"],
+    "inclusivity": ["IPC Reports", "Participating Nations Statistics"],
+    "innovation": ["Olympedia", "IFs Reports"],
+    "safety": ["IOC Medical Reports", "Academic Literature"]
+  }
+}

@@ -1,0 +1,173 @@
+% 第二章 理论基础与文献综述
+% ch2-literature.tex
+
+\subsection{多准则决策理论概述}
+
+多准则决策（Multi-Criteria Decision Making, MCDM）是指在多个相互冲突的准则下，从有限或无限方案中选择最优方案的决策过程。MCDM问题可形式化描述为：
+
+给定方案集 $S = \{s_1, s_2, \ldots, s_n\}$ 和准则集 $C = \{c_1, c_2, \ldots, c_m\}$，确定方案的综合排序或最优选择。
+
+MCDM方法主要分为两类：
+\begin{enumerate}
+\item 多属性决策（MADM）：从有限方案中选择最优方案
+\item 多目标决策（MODM）：在无限方案中寻找满意解
+\end{enumerate}
+
+本研究属于MADM范畴，奥运项目评估是从备选项目中选择最优组合。
+
+\subsection{AHP层次分析法理论}
+
+\subsubsection{基本原理}
+
+层次分析法（Analytic Hierarchy Process, AHP）由Saaty\cite{saaty2007analytic}提出，是一种将复杂决策问题层次化、定量化的系统分析方法。其核心思想是将决策问题分解为目标层、准则层和方案层，通过两两比较确定各元素的相对重要性。
+
+\subsubsection{判断矩阵}
+
+对于 $n$ 个指标，构造判断矩阵 $A = [a_{ij}]_{n \times n}$，其中 $a_{ij}$ 表示指标 $i$ 相对于指标 $j$ 的重要性。判断矩阵满足：
+\begin{equation}
+a_{ij} > 0, \quad a_{ji} = \frac{1}{a_{ij}}, \quad a_{ii} = 1
+\label{eq:reciprocal}
+\end{equation}
+
+Saaty提出1-9标度法，如表\ref{tab:scale}所示。
+
+\begin{table}[htbp]
+\centering
+\caption{Saaty 1-9标度法}
+\label{tab:scale}
+\begin{tabular}{cl}
+\toprule
+标度 & 含义 \\
+\midrule
+1 & 同等重要 \\
+3 & 稍微重要 \\
+5 & 明显重要 \\
+7 & 强烈重要 \\
+9 & 极端重要 \\
+2,4,6,8 & 中间值 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{权重计算}
+
+通过求解特征值问题得到权重向量：
+\begin{equation}
+AW = \lambda_{\max} W
+\label{eq:eigenvalue}
+\end{equation}
+其中 $\lambda_{\max}$ 为最大特征值，$W$ 为对应的特征向量，归一化后即为权重向量。
+
+\subsubsection{一致性检验}
+
+定义一致性指标（CI）和一致性比率（CR）：
+\begin{equation}
+CI = \frac{\lambda_{\max} - n}{n - 1}
+\label{eq:ci}
+\end{equation}
+\begin{equation}
+CR = \frac{CI}{RI}
+\label{eq:cr}
+\end{equation}
+其中 $RI$ 为平均随机一致性指标。当 $CR < 0.1$ 时，判断矩阵通过一致性检验。
+
+\subsection{EWM熵权法理论}
+
+\subsubsection{信息熵概念}
+
+信息熵是度量不确定性的重要概念，其数学定义为：
+\begin{equation}
+H(X) = -\sum_{i=1}^{n} p_i \ln p_i
+\label{eq:entropy}
+\end{equation}
+信息熵具有以下性质：
+\begin{enumerate}
+\item 非负性：$H(X) \geq 0$
+\item 极值性：当所有状态等概率时熵最大，当某状态概率为1时熵为0
+\end{enumerate}
+
+\subsubsection{熵权计算}
+
+对于决策矩阵 $X = [x_{ij}]_{n \times m}$，熵权计算步骤如下：
+
+Step 1: 数据标准化
+\begin{equation}
+\tilde{x}_{ij} = \frac{x_{ij} - \min_j x_{ij}}{\max_j x_{ij} - \min_j x_{ij}}
+\label{eq:normalize}
+\end{equation}
+
+Step 2: 计算比重
+\begin{equation}
+p_{ij} = \frac{\tilde{x}_{ij}}{\sum_{i=1}^{n} \tilde{x}_{ij}}
+\label{eq:proportion}
+\end{equation}
+
+Step 3: 计算信息熵
+\begin{equation}
+H_j = -\frac{1}{\ln n} \sum_{i=1}^{n} p_{ij} \ln p_{ij}
+\label{eq:info_entropy}
+\end{equation}
+
+Step 4: 计算熵权
+\begin{equation}
+w_j^{EWM} = \frac{1 - H_j}{\sum_{j=1}^{m} (1 - H_j)}
+\label{eq:entropy_weight}
+\end{equation}
+
+熵权反映指标的变异程度：数据差异越大，信息熵越小，权重越大。
+
+\subsection{混合权重模型理论基础}
+
+\subsubsection{组合权重的必要性}
+
+AHP权重反映专家的主观判断，EWM权重反映数据的客观分布。单一方法各有局限：
+\begin{itemize}
+\item 纯AHP：主观性强，依赖专家质量
+\item 纯EWM：忽略领域知识，可能偏离实际重要性
+\end{itemize}
+
+混合权重模型综合主客观信息，提高决策科学性\cite{zhang2023risk}。
+
+\subsubsection{线性组合模型}
+
+\begin{equation}
+W = \alpha \cdot W^{AHP} + (1 - \alpha) \cdot W^{EWM}
+\label{eq:hybrid}
+\end{equation}
+其中 $\alpha \in [0,1]$ 为组合系数。当 $\alpha = 0.5$ 时，主客观权重同等重要。
+
+\subsubsection{组合系数确定}
+
+组合系数 $\alpha$ 的确定方法：
+\begin{enumerate}
+\item 经验法：取 $\alpha = 0.5$
+\item 灵敏度分析：测试不同 $\alpha$ 下的结果稳定性
+\item 优化法：基于历史数据拟合最优 $\alpha$
+\end{enumerate}
+
+本研究采用灵敏度分析法，在实验章节详细讨论。
+
+\subsection{奥运项目评估相关研究综述}
+
+\subsubsection{IOC评估标准}
+
+Song等\cite{song2025quantifying}总结了IOC对新项目的评估标准，包括流行度、性别平等、可持续性、包容性、创新性、安全性六个维度。李凤梅\cite{li2013xiaji}从人文、经济、社会角度分析了奥运项目设置标准。
+
+\subsubsection{现有方法对比}
+
+\begin{table}[htbp]
+\centering
+\caption{奥运项目评估方法对比}
+\label{tab:method_comparison}
+\begin{tabular}{lccc}
+\toprule
+方法 & 主观性 & 客观性 & 适用场景 \\
+\midrule
+专家评议 & 高 & 低 & 传统方法 \\
+Song方法 (AHP+PCA+KNN) & 中 & 高 & 分类问题 \\
+本研究 (AHP+EWM) & 中 & 中 & 评分排序 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+本研究与Song等\cite{song2025quantifying}的方法在应用场景上有所不同：Song方法适合项目分类（入选/淘汰），本研究适合项目评分排序。
