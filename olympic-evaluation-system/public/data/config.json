@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "defaultAlpha": 0.5,
+  "dimensions": [
+    { "id": "popularity", "name": "流行度", "nameEn": "Popularity" },
+    { "id": "gender_equity", "name": "性别平等", "nameEn": "Gender Equity" },
+    { "id": "sustainability", "name": "可持续性", "nameEn": "Sustainability" },
+    { "id": "inclusivity", "name": "包容性", "nameEn": "Inclusivity" },
+    { "id": "innovation", "name": "创新性", "nameEn": "Innovation" },
+    { "id": "safety", "name": "安全性", "nameEn": "Safety" }
+  ],
+  "riValues": {
+    "3": 0.52,
+    "4": 0.89,
+    "5": 1.12,
+    "6": 1.26,
+    "7": 1.36,
+    "8": 1.41,
+    "9": 1.46
+  },
+  "thresholds": {
+    "highProbability": 0.7,
+    "mediumProbability": 0.4,
+    "lowProbability": 0.4
+  },
+  "presetMatrices": {
+    "balanced": {
+      "name": "均衡方案",
+      "description": "各指标权重相对均衡"
+    },
+    "popularityFocused": {
+      "name": "重视流行度",
+      "description": "流行度权重较高"
+    },
+    "equityFocused": {
+      "name": "重视性别平等",
+      "description": "性别平等权重较高"
+    }
+  }
+}

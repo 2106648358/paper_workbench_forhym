@@ -1,0 +1,48 @@
+{
+  "category": "candidate",
+  "description": "奥运会候选项目",
+  "projects": [
+    {
+      "id": "esports",
+      "name": "电子竞技",
+      "nameEn": "Esports",
+      "yearAdded": null,
+      "indicators": {
+        "popularity": 0.95,
+        "gender_equity": 0.65,
+        "sustainability": 0.85,
+        "inclusivity": 0.55,
+        "innovation": 1.0,
+        "safety": 0.95
+      }
+    },
+    {
+      "id": "cricket",
+      "name": "板球",
+      "nameEn": "Cricket",
+      "yearAdded": null,
+      "indicators": {
+        "popularity": 0.85,
+        "gender_equity": 0.70,
+        "sustainability": 0.60,
+        "inclusivity": 0.50,
+        "innovation": 0.45,
+        "safety": 0.65
+      }
+    },
+    {
+      "id": "squash",
+      "name": "壁球",
+      "nameEn": "Squash",
+      "yearAdded": null,
+      "indicators": {
+        "popularity": 0.50,
+        "gender_equity": 0.88,
+        "sustainability": 0.70,
+        "inclusivity": 0.45,
+        "innovation": 0.50,
+        "safety": 0.65
+      }
+    }
+  ]
+}

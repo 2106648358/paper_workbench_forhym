@@ -1,0 +1,384 @@
+{
+  "category": "core",
+  "description": "奥运会核心项目",
+  "projects": [
+    {
+      "id": "athletics",
+      "name": "田径",
+      "nameEn": "Athletics",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.95,
+        "gender_equity": 0.88,
+        "sustainability": 0.70,
+        "inclusivity": 0.88,
+        "innovation": 0.35,
+        "safety": 0.75
+      }
+    },
+    {
+      "id": "swimming",
+      "name": "游泳",
+      "nameEn": "Swimming",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.92,
+        "gender_equity": 0.95,
+        "sustainability": 0.60,
+        "inclusivity": 0.85,
+        "innovation": 0.40,
+        "safety": 0.88
+      }
+    },
+    {
+      "id": "gymnastics",
+      "name": "体操",
+      "nameEn": "Gymnastics",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.88,
+        "gender_equity": 0.85,
+        "sustainability": 0.55,
+        "inclusivity": 0.55,
+        "innovation": 0.45,
+        "safety": 0.62
+      }
+    },
+    {
+      "id": "basketball",
+      "name": "篮球",
+      "nameEn": "Basketball",
+      "yearAdded": 1936,
+      "indicators": {
+        "popularity": 0.93,
+        "gender_equity": 0.92,
+        "sustainability": 0.75,
+        "inclusivity": 0.82,
+        "innovation": 0.50,
+        "safety": 0.55
+      }
+    },
+    {
+      "id": "football",
+      "name": "足球",
+      "nameEn": "Football",
+      "yearAdded": 1900,
+      "indicators": {
+        "popularity": 0.98,
+        "gender_equity": 0.80,
+        "sustainability": 0.80,
+        "inclusivity": 0.90,
+        "innovation": 0.40,
+        "safety": 0.50
+      }
+    },
+    {
+      "id": "tennis",
+      "name": "网球",
+      "nameEn": "Tennis",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.85,
+        "gender_equity": 0.90,
+        "sustainability": 0.65,
+        "inclusivity": 0.60,
+        "innovation": 0.45,
+        "safety": 0.70
+      }
+    },
+    {
+      "id": "volleyball",
+      "name": "排球",
+      "nameEn": "Volleyball",
+      "yearAdded": 1964,
+      "indicators": {
+        "popularity": 0.82,
+        "gender_equity": 0.95,
+        "sustainability": 0.70,
+        "inclusivity": 0.75,
+        "innovation": 0.40,
+        "safety": 0.65
+      }
+    },
+    {
+      "id": "cycling",
+      "name": "自行车",
+      "nameEn": "Cycling",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.75,
+        "gender_equity": 0.85,
+        "sustainability": 0.80,
+        "inclusivity": 0.65,
+        "innovation": 0.50,
+        "safety": 0.60
+      }
+    },
+    {
+      "id": "fencing",
+      "name": "击剑",
+      "nameEn": "Fencing",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.88,
+        "sustainability": 0.75,
+        "inclusivity": 0.50,
+        "innovation": 0.45,
+        "safety": 0.80
+      }
+    },
+    {
+      "id": "judo",
+      "name": "柔道",
+      "nameEn": "Judo",
+      "yearAdded": 1964,
+      "indicators": {
+        "popularity": 0.65,
+        "gender_equity": 0.85,
+        "sustainability": 0.80,
+        "inclusivity": 0.70,
+        "innovation": 0.45,
+        "safety": 0.55
+      }
+    },
+    {
+      "id": "rowing",
+      "name": "赛艇",
+      "nameEn": "Rowing",
+      "yearAdded": 1900,
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.90,
+        "sustainability": 0.85,
+        "inclusivity": 0.60,
+        "innovation": 0.35,
+        "safety": 0.75
+      }
+    },
+    {
+      "id": "shooting",
+      "name": "射击",
+      "nameEn": "Shooting",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.50,
+        "gender_equity": 0.85,
+        "sustainability": 0.60,
+        "inclusivity": 0.55,
+        "innovation": 0.40,
+        "safety": 0.90
+      }
+    },
+    {
+      "id": "table_tennis",
+      "name": "乒乓球",
+      "nameEn": "Table Tennis",
+      "yearAdded": 1988,
+      "indicators": {
+        "popularity": 0.78,
+        "gender_equity": 0.95,
+        "sustainability": 0.80,
+        "inclusivity": 0.65,
+        "innovation": 0.35,
+        "safety": 0.85
+      }
+    },
+    {
+      "id": "weightlifting",
+      "name": "举重",
+      "nameEn": "Weightlifting",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.75,
+        "sustainability": 0.75,
+        "inclusivity": 0.55,
+        "innovation": 0.30,
+        "safety": 0.45
+      }
+    },
+    {
+      "id": "diving",
+      "name": "跳水",
+      "nameEn": "Diving",
+      "yearAdded": 1904,
+      "indicators": {
+        "popularity": 0.72,
+        "gender_equity": 0.90,
+        "sustainability": 0.60,
+        "inclusivity": 0.50,
+        "innovation": 0.55,
+        "safety": 0.55
+      }
+    },
+    {
+      "id": "badminton",
+      "name": "羽毛球",
+      "nameEn": "Badminton",
+      "yearAdded": 1992,
+      "indicators": {
+        "popularity": 0.75,
+        "gender_equity": 0.92,
+        "sustainability": 0.75,
+        "inclusivity": 0.60,
+        "innovation": 0.40,
+        "safety": 0.70
+      }
+    },
+    {
+      "id": "boxing",
+      "name": "拳击",
+      "nameEn": "Boxing",
+      "yearAdded": 1904,
+      "indicators": {
+        "popularity": 0.70,
+        "gender_equity": 0.65,
+        "sustainability": 0.70,
+        "inclusivity": 0.60,
+        "innovation": 0.35,
+        "safety": 0.35
+      }
+    },
+    {
+      "id": "archery",
+      "name": "射箭",
+      "nameEn": "Archery",
+      "yearAdded": 1900,
+      "indicators": {
+        "popularity": 0.50,
+        "gender_equity": 0.90,
+        "sustainability": 0.75,
+        "inclusivity": 0.60,
+        "innovation": 0.40,
+        "safety": 0.92
+      }
+    },
+    {
+      "id": "equestrian",
+      "name": "马术",
+      "nameEn": "Equestrian",
+      "yearAdded": 1900,
+      "indicators": {
+        "popularity": 0.45,
+        "gender_equity": 0.95,
+        "sustainability": 0.40,
+        "inclusivity": 0.45,
+        "innovation": 0.35,
+        "safety": 0.65
+      }
+    },
+    {
+      "id": "handball",
+      "name": "手球",
+      "nameEn": "Handball",
+      "yearAdded": 1936,
+      "indicators": {
+        "popularity": 0.60,
+        "gender_equity": 0.90,
+        "sustainability": 0.70,
+        "inclusivity": 0.65,
+        "innovation": 0.40,
+        "safety": 0.50
+      }
+    },
+    {
+      "id": "hockey",
+      "name": "曲棍球",
+      "nameEn": "Hockey",
+      "yearAdded": 1908,
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.88,
+        "sustainability": 0.65,
+        "inclusivity": 0.60,
+        "innovation": 0.35,
+        "safety": 0.55
+      }
+    },
+    {
+      "id": "canoe",
+      "name": "皮划艇",
+      "nameEn": "Canoe",
+      "yearAdded": 1936,
+      "indicators": {
+        "popularity": 0.50,
+        "gender_equity": 0.85,
+        "sustainability": 0.80,
+        "inclusivity": 0.55,
+        "innovation": 0.40,
+        "safety": 0.65
+      }
+    },
+    {
+      "id": "sailing",
+      "name": "帆船",
+      "nameEn": "Sailing",
+      "yearAdded": 1900,
+      "indicators": {
+        "popularity": 0.48,
+        "gender_equity": 0.88,
+        "sustainability": 0.85,
+        "inclusivity": 0.45,
+        "innovation": 0.50,
+        "safety": 0.75
+      }
+    },
+    {
+      "id": "wrestling",
+      "name": "摔跤",
+      "nameEn": "Wrestling",
+      "yearAdded": 1896,
+      "indicators": {
+        "popularity": 0.55,
+        "gender_equity": 0.60,
+        "sustainability": 0.75,
+        "inclusivity": 0.65,
+        "innovation": 0.30,
+        "safety": 0.45
+      }
+    },
+    {
+      "id": "taekwondo",
+      "name": "跆拳道",
+      "nameEn": "Taekwondo",
+      "yearAdded": 2000,
+      "indicators": {
+        "popularity": 0.70,
+        "gender_equity": 0.90,
+        "sustainability": 0.80,
+        "inclusivity": 0.75,
+        "innovation": 0.50,
+        "safety": 0.55
+      }
+    },
+    {
+      "id": "triathlon",
+      "name": "铁人三项",
+      "nameEn": "Triathlon",
+      "yearAdded": 2000,
+      "indicators": {
+        "popularity": 0.60,
+        "gender_equity": 0.92,
+        "sustainability": 0.75,
+        "inclusivity": 0.55,
+        "innovation": 0.60,
+        "safety": 0.60
+      }
+    },
+    {
+      "id": "water_polo",
+      "name": "水球",
+      "nameEn": "Water Polo",
+      "yearAdded": 1900,
+      "indicators": {
+        "popularity": 0.45,
+        "gender_equity": 0.85,
+        "sustainability": 0.60,
+        "inclusivity": 0.50,
+        "innovation": 0.35,
+        "safety": 0.60
+      }
+    }
+  ]
+}

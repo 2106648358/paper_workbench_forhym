@@ -1,0 +1,17 @@
+{
+  "calculated": "2026-03-18",
+  "weights": {
+    "popularity": 0.36,
+    "gender_equity": 0.176,
+    "sustainability": 0.112,
+    "inclusivity": 0.095,
+    "innovation": 0.063,
+    "safety": 0.174
+  },
+  "consistency": {
+    "lambdaMax": 6.042,
+    "CI": 0.0084,
+    "CR": 0.0067,
+    "passed": true
+  }
+}

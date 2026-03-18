@@ -1,29 +1,31 @@
 ## Context
 
-本项目旨在构建一个基于 AHP-EWM 混合模型的奥运项目评估与预测系统，同时完成毕业论文的 LaTeX 工程。系统需要处理多源异构数据、实现混合权重计算、提供可视化展示，并生成论文所需的图表和报告。
+本项目旨在构建一个基于 AHP-EWM 混合模型的奥运项目评估与预测系统，同时完成毕业论文的系统设计与实现章节。系统需要实现混合权重计算、提供可视化展示、支持交互式参数调整，并生成论文所需的图表。
 
 **约束条件**：
 - 时间约束：需在论文截止日期前完成全部工作
-- 技术约束：使用 Python 生态，兼容 Windows 开发环境
-- 数据约束：依赖公开数据源，部分数据可能需要手动采集
+- 技术约束：纯前端项目，Node.js 环境，React 或 Vue 框架
+- 数据约束：静态 JSON 数据文件，无需后端 API
+- 部署约束：可部署到 GitHub Pages 或 Vercel，也可本地运行
 
-**相关方**：论文指导教师、答辩委员会、潜在的系统用户（IOC 决策者）
+**相关方**：论文指导教师、答辩委员会、潜在的系统用户（IOC 决策者模拟）
 
 ## Goals / Non-Goals
 
 **Goals:**
-- 实现完整的 AHP-EWM 混合权重计算流程
-- 构建六维指标评价体系并进行量化
-- 收集并处理 2000-2024 年奥运项目历史数据
-- 开发可交互的 Web 可视化仪表盘
-- 生成符合论文要求的图表、表格和结论
-- 完成 LaTeX 论文撰写并编译生成 PDF
+- 实现完整的 AHP-EWM 混合权重计算流程（前端 JavaScript 实现）
+- 构建六维指标评价体系并进行可视化展示
+- 开发交互式 Web 可视化仪表盘，支持参数调整
+- 展示项目评分、排名、权重对比、预测推荐结果
+- AHP 和 EWM 计算过程可视化，让模型"透明化"
+- 完成论文系统设计与实现章节
 
 **Non-Goals:**
 - 不部署到生产环境（仅作为演示和研究用途）
-- 不集成实时数据 API（使用离线数据集）
+- 不集成实时数据 API（使用静态 JSON 数据集）
 - 不开发移动端应用
 - 不涉及 IOC 内部决策流程集成
+- 不需要后端服务
 
 ## Decisions
 
@@ -31,130 +33,275 @@
 
 | 层次 | 技术选型 | 理由 |
 |------|----------|------|
-| 数据处理 | Python 3.10+ / Pandas / NumPy | 生态成熟，论文可复现性强 |
-| 权重计算 | 自研 AHP-EWM 模块 | 便于定制化和论文阐述 |
-| Web 框架 | Streamlit | 快速原型开发，适合数据展示 |
-| 可视化 | Plotly / ECharts | 交互性强，图表可导出 |
-| 论文撰写 | LaTeX (XeLaTeX) | 学术规范，公式排版优美 |
-| 版本控制 | Git / GitHub | 代码和论文版本管理 |
+| 前端框架 | React 18+ / Vue 3+ | 生态成熟，组件化开发，TypeScript 支持 |
+| 构建工具 | Vite | 快速开发体验，热更新，原生 ESM |
+| 状态管理 | Zustand (React) / Pinia (Vue) | 轻量级，易于使用 |
+| 可视化 | ECharts | 功能强大，雷达图/柱状图/散点图效果优秀 |
+| 数据表格 | react-table (React) / vxe-table (Vue) | 支持排序、筛选、分页 |
+| 数学计算 | 自研 + math.js | AHP/EWM 核心算法自研，复杂运算用 math.js |
+| 样式方案 | Tailwind CSS | 快速开发，响应式设计 |
+| 语言 | TypeScript | 类型安全，开发体验好 |
+| 部署 | GitHub Pages / Vercel | 免费，自动部署 |
 
-**备选方案**：
-- Web 框架备选：Flask（更灵活但开发周期长）、Dash（Plotly 官方框架）
-- 可视化备选：Matplotlib（静态图表）、D3.js（定制性强但学习曲线陡峭）
+**推荐方案**：React + TypeScript + Vite + ECharts + Zustand + Tailwind CSS
 
-### 2. 系统架构
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Visualization Layer                       │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │   Dashboard  │  │   Charts     │  │   Reports    │      │
-│  │  (Streamlit) │  │  (Plotly)    │  │  (LaTeX/MD)  │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-├─────────────────────────────────────────────────────────────┤
-│                    Application Layer                         │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │  Prediction  │  │  Evaluation  │  │   Report     │      │
-│  │   Engine     │  │   Metrics    │  │  Generator   │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-├─────────────────────────────────────────────────────────────┤
-│                      Model Layer                             │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │              AHP-EWM Hybrid Model                     │  │
-│  │  ┌─────────┐    ┌─────────┐    ┌─────────────────┐  │  │
-│  │  │   AHP   │ +  │   EWM   │ →  │  Combined Weight│  │  │
-│  │  │(Subject)│    │(Object) │    │  Calculation    │  │  │
-│  │  └─────────┘    └─────────┘    └─────────────────┘  │  │
-│  └──────────────────────────────────────────────────────┘  │
-├─────────────────────────────────────────────────────────────┤
-│                     Data Layer                               │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │  Raw Data    │  │  Preprocessed│  │  Feature     │      │
-│  │  (CSV/JSON)  │→ │    Data      │→ │  Store       │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### 3. 六维指标体系设计
-
-| 维度 | 指标说明 | 数据来源 | 量化方法 |
-|------|----------|----------|----------|
-| 流行度 | 全球参与人数、观众收视率、社交媒体讨论度 | IFs 报告、收视率数据、社交 API | Min-Max 归一化 |
-| 性别平等 | 男女参赛比例、混合项目数量 | IOC 官方数据 | 比例计算 + 偏差惩罚 |
-| 可持续性 | 碳排放、场馆建设成本、资源消耗 | IOC 可持续报告 | 反向归一化 |
-| 包容性 | 残奥项目关联、发展中国家参与度 | IPC 数据、参赛国分布 | 加权综合评分 |
-| 创新性 | 新项目引入频率、技术革新程度 | 历史项目变化记录 | 时间序列分析 |
-| 安全性 | 受伤率、医疗保障需求 | 医疗报告、保险数据 | 反向归一化 |
-
-### 4. AHP-EWM 混合权重计算流程
+### 2. 系统架构（纯前端）
 
 ```
-Step 1: AHP 层次分析
-  ├── 构建判断矩阵 (专家打分)
-  ├── 一致性检验 (CR < 0.1)
-  └── 计算主观权重 W_AHP
-
-Step 2: 熵权法 EWM
-  ├── 数据标准化
-  ├── 计算信息熵
-  └── 计算客观权重 W_EWM
-
-Step 3: 组合权重
-  ├── 线性组合: W = α * W_AHP + (1-α) * W_EWM
-  ├── α 值通过灵敏度分析确定 (建议 α=0.5)
-  └── 输出最终权重向量
+┌─────────────────────────────────────────────────────────────────┐
+│                    展示层 (React/Vue Components)                 │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐           │
+│  │ AHP面板  │ │ EWM面板  │ │ 项目评估 │ │ 预测推荐 │           │
+│  │          │ │          │ │          │ │          │           │
+│  │判断矩阵  │ │熵权计算  │ │雷达图    │ │概率图    │           │
+│  │权重图    │ │对比图    │ │排名表    │ │建议      │           │
+│  │一致性检验│ │数据表格  │ │对比分析  │ │灵敏度    │           │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘           │
+├─────────────────────────────────────────────────────────────────┤
+│                    状态层 (Zustand/Pinia)                        │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │ • currentAlpha: number          (α 参数)                │   │
+│  │ • judgmentMatrix: number[][]    (判断矩阵)              │   │
+│  │ • projects: Project[]           (项目数据)              │   │
+│  │ • weights: { ahp, ewm, hybrid } (权重结果)              │   │
+│  │ • selectedProjects: string[]    (选中项目)              │   │
+│  └─────────────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────────────┤
+│                    计算层 (TypeScript/JavaScript)                │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐           │
+│  │ AHP计算  │ │ EWM计算  │ │ 权重混合 │ │ 项目评分 │           │
+│  │          │ │          │ │          │ │          │           │
+│  │特征值法  │ │数据标准化│ │α参数调整 │ │综合评分  │           │
+│  │CR检验    │ │信息熵    │ │灵敏度分析│ │排名      │           │
+│  │幂迭代法  │ │熵权      │ │          │ │预测概率  │           │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘           │
+├─────────────────────────────────────────────────────────────────┤
+│                    数据层 (静态 JSON 文件)                       │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐           │
+│  │ config   │ │ ahp/     │ │ ewm/     │ │ projects/│           │
+│  │ .json    │ │ *.json   │ │ *.json   │ │ *.json   │           │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘           │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### 5. 数据采集计划
-
-| 数据类型 | 数据源 | 采集方式 | 时间范围 |
-|----------|--------|----------|----------|
-| 奥运项目清单 | IOC 官网、Olympedia | 网页爬虫/手动整理 | 2000-2024 |
-| 参赛数据 | Olympedia、各 IFs | API/爬虫 | 2000-2024 |
-| 收视率数据 | Nielsen、IOC 报告 | 手动采集 | 2012-2024 |
-| 社交媒体数据 | Twitter/X API | API 采集 | 2020-2024 |
-| 可持续性报告 | IOC 可持续报告 | PDF 提取 | 2012-2024 |
-
-### 6. LaTeX 论文结构
+### 3. 数据文件结构
 
 ```
-thesis/
-├── main.tex                 # 主文件
-├── chapters/
-│   ├── ch1-introduction.tex      # 绪论
-│   ├── ch2-literature.tex        # 文献综述
-│   ├── ch3-methodology.tex       # 研究方法 (AHP-EWM)
-│   ├── ch4-system-design.tex     # 系统设计
-│   ├── ch5-experiments.tex       # 实验与结果
-│   └── ch6-conclusion.tex        # 结论与展望
-├── figures/                 # 图片目录
-├── tables/                  # 表格目录
-├── references.bib           # 参考文献
-└── thesis-template/         # 模板文件
+public/data/
+├── config.json                 # 全局配置
+│   ├── version                 # 版本号
+│   ├── defaultAlpha            # 默认 α 值 (0.5)
+│   ├── dimensions[]            # 六维指标定义
+│   ├── riValues                # 随机一致性指标 RI 值
+│   └── thresholds              # 入选/淘汰阈值
+│
+├── ahp/
+│   ├── judgment-matrix.json    # 判断矩阵（专家数据）
+│   │   ├── experts[]           # 专家信息
+│   │   ├── matrices            # 各专家判断矩阵
+│   │   └── aggregated          # 整合后矩阵
+│   └── weights.json            # AHP 权重计算结果
+│       ├── weights             # 权重向量
+│       └── consistency         # 一致性检验结果
+│
+├── ewm/
+│   ├── raw-indicators.json     # 原始指标数据
+│   ├── normalized.json         # 标准化后数据
+│   └── weights.json            # EWM 权重结果
+│
+├── projects/
+│   ├── core.json               # 核心项目（田径、游泳等）
+│   ├── new.json                # 新增项目（攀岩、滑板等）
+│   ├── candidate.json          # 候选项目（电竞等）
+│   └── removed.json            # 已移除项目（空手道等）
+│
+└── results/
+    ├── rankings.json           # 最终排名结果
+    └── predictions.json        # 2032 预测结果
 ```
+
+### 4. 可视化模块设计
+
+#### 4.1 AHP 可视化面板
+
+| 组件 | 功能 | 交互 |
+|------|------|------|
+| JudgmentMatrixEditor | 判断矩阵展示与编辑 | 支持修改判断值，实时计算 |
+| ConsistencyCheck | 一致性检验结果展示 | 显示 CR 值，通过/警告状态 |
+| AHPWeightsChart | AHP 权重柱状图 | 鼠标悬停显示数值 |
+| ExpertComparison | 多专家权重对比 | 可选择查看单个专家或整合结果 |
+
+#### 4.2 EWM 可视化面板
+
+| 组件 | 功能 | 交互 |
+|------|------|------|
+| RawDataTable | 原始指标数据表格 | 可排序、筛选 |
+| NormalizedTable | 标准化数据展示 | 切换原始/标准化视图 |
+| EntropyValues | 信息熵值展示 | 显示各指标熵值和效用值 |
+| EWMWeightsChart | EWM 权重柱状图 | 与 AHP 权重并列对比 |
+
+#### 4.3 混合权重面板
+
+| 组件 | 功能 | 交互 |
+|------|------|------|
+| AlphaSlider | α 参数滑块 | 拖动调整 α，实时更新权重 |
+| WeightsComparison | 三种权重对比图 | AHP/EWM/Hybrid 并列展示 |
+| SensitivityChart | 灵敏度分析图 | 排名稳定性 vs α 曲线 |
+
+#### 4.4 项目评估面板
+
+| 组件 | 功能 | 交互 |
+|------|------|------|
+| ProjectSelector | 项目选择器 | 多选/全选，按类型筛选 |
+| RadarChart | 六维雷达图 | 多项目叠加对比 |
+| RankingTable | 综合排名表格 | 排序、分页、导出 CSV |
+| ScoreBreakdown | 评分分解图 | 展示各维度贡献 |
+
+#### 4.5 预测推荐面板
+
+| 组件 | 功能 | 交互 |
+|------|------|------|
+| ProbabilityChart | 入选概率图 | 横向柱状图，高/中/低概率分色 |
+| PredictionSummary | 预测摘要 | 高概率入选/淘汰项目列表 |
+| RecommendationCard | 改进建议卡片 | 选中项目后显示改进建议 |
+
+### 5. 核心计算算法（JavaScript 实现）
+
+#### 5.1 AHP 权重计算
+
+```typescript
+// 使用幂迭代法求主特征值和特征向量
+function powerIteration(matrix: number[][], maxIter = 100): { eigenvalue: number, eigenvector: number[] }
+
+// 计算一致性比率
+function consistencyRatio(matrix: number[][], lambdaMax: number): { CI: number, CR: number, passed: boolean }
+
+// 多专家矩阵几何平均
+function geometricMean(matrices: number[][][]): number[][]
+```
+
+#### 5.2 EWM 权重计算
+
+```typescript
+// Min-Max 标准化
+function normalize(data: number[][], direction: ('positive' | 'negative')[]): number[][]
+
+// 计算信息熵
+function entropy(normalizedData: number[][]): number[]
+
+// 计算熵权
+function entropyWeight(entropyValues: number[]): number[]
+```
+
+#### 5.3 项目评分
+
+```typescript
+// 综合评分计算
+function projectScore(indicators: Record<string, number>, weights: Record<string, number>): number
+
+// 项目排名
+function rankProjects(projects: Project[], weights: Record<string, number>): RankedProject[]
+
+// 入选概率预测
+function predictProbability(score: number, historicalData: HistoricalData): number
+```
+
+### 6. 项目目录结构
+
+```
+olympic-evaluation-system/
+├── public/
+│   └── data/                    # 静态 JSON 数据
+│       ├── config.json
+│       ├── ahp/
+│       ├── ewm/
+│       ├── projects/
+│       └── results/
+│
+├── src/
+│   ├── components/              # UI 组件
+│   │   ├── ahp/
+│   │   │   ├── JudgmentMatrix.tsx
+│   │   │   ├── WeightsChart.tsx
+│   │   │   └── ConsistencyCheck.tsx
+│   │   ├── ewm/
+│   │   │   ├── EntropyTable.tsx
+│   │   │   └── WeightsChart.tsx
+│   │   ├── hybrid/
+│   │   │   ├── AlphaSlider.tsx
+│   │   │   ├── WeightsComparison.tsx
+│   │   │   └── SensitivityChart.tsx
+│   │   ├── projects/
+│   │   │   ├── ProjectSelector.tsx
+│   │   │   ├── RadarChart.tsx
+│   │   │   ├── RankingTable.tsx
+│   │   │   └── ProjectCompare.tsx
+│   │   ├── prediction/
+│   │   │   ├── ProbabilityChart.tsx
+│   │   │   └── Recommendations.tsx
+│   │   └── layout/
+│   │       ├── Header.tsx
+│   │       ├── Sidebar.tsx
+│   │       └── Layout.tsx
+│   │
+│   ├── hooks/                   # 自定义 Hooks
+│   │   ├── useAHP.ts
+│   │   ├── useEWM.ts
+│   │   ├── useHybrid.ts
+│   │   └── useProjects.ts
+│   │
+│   ├── lib/                     # 计算逻辑
+│   │   ├── ahp.ts
+│   │   ├── ewm.ts
+│   │   ├── hybrid.ts
+│   │   └── scoring.ts
+│   │
+│   ├── store/                   # 状态管理
+│   │   ├── useAppStore.ts
+│   │   └── useDataStore.ts
+│   │
+│   ├── types/                   # TypeScript 类型定义
+│   │   ├── config.ts
+│   │   ├── project.ts
+│   │   └── weights.ts
+│   │
+│   ├── utils/                   # 工具函数
+│   │   ├── dataLoader.ts
+│   │   └── formatters.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── tailwind.config.js
+└── README.md
+```
+
+### 7. 部署方案
+
+| 方案 | 命令 | URL |
+|------|------|-----|
+| 本地开发 | `npm run dev` | http://localhost:5173 |
+| 构建生产 | `npm run build` | dist/ 目录 |
+| GitHub Pages | `npm run deploy` | https://username.github.io/olympic-evaluation |
+| Vercel | 连接 Git 仓库 | 自动部署 |
 
 ## Risks / Trade-offs
 
 | 风险 | 影响 | 缓解措施 |
 |------|------|----------|
-| 数据缺失或不完整 | 影响模型准确性 | 使用插值、相似数据替代、敏感性分析 |
-| 专家打分主观性 | AHP 权重偏差 | 多专家打分取平均、德尔菲法迭代 |
-| 模型验证困难 | 预测结果可信度存疑 | 使用历史数据回测、与实际决策对比 |
-| 开发时间不足 | 功能简化 | 优先核心功能，可视化作为增强项 |
-| LaTeX 编译问题 | 论文提交延误 | 使用成熟模板、提前测试编译环境 |
-
-## Migration Plan
-
-不涉及生产迁移，但需确保：
-
-1. **环境配置**：创建 `requirements.txt` 和 `environment.yml`
-2. **数据备份**：定期备份采集的原始数据
-3. **版本管理**：Git 提交规范，论文与代码同步更新
-4. **回滚策略**：保留每个阶段的工作版本（v1.0, v2.0 等）
+| AHP 特征值计算精度 | JS 数值精度有限 | 使用幂迭代法足够精确，6×6 矩阵误差小 |
+| 大数据量性能 | 项目数量增多可能卡顿 | 使用虚拟滚动，限制显示数量 |
+| 浏览器兼容性 | 旧浏览器可能不支持 | Vite 自动处理，目标 es2020 |
+| 数据加载失败 | JSON 文件加载异常 | 添加错误处理和加载状态 |
+| 开发时间不足 | 功能简化 | 优先核心功能，可视化分阶段实现 |
 
 ## Open Questions
 
-1. 是否需要邀请领域专家进行 AHP 打分？还是使用模拟数据？
-2. 2032 年预测的具体项目列表如何确定？
-3. LaTeX 模板是否有学校特定要求？
-4. 论文提交格式要求（页数、图表规范等）？
+1. **框架选择**：React 还是 Vue？（建议 React，生态更大）
+2. **是否支持判断矩阵在线编辑**？还是只展示预设值？
+3. **预测算法**：简单评分排名还是加入历史趋势分析？
+4. **是否需要导出功能**？（导出 CSV、截图等）
