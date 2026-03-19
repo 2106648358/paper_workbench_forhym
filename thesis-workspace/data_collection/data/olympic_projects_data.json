@@ -1,0 +1,499 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "created_date": "2026-03-18",
+    "description": "奥运项目六维指标评估数据集",
+    "thesis_section": "第四章 实验设计与数据分析",
+    "data_sources": [
+      {
+        "name": "IOC Olympics",
+        "url": "https://olympics.com",
+        "data_types": [
+          "性别平等",
+          "流行度代理"
+        ]
+      },
+      {
+        "name": "IPC Paralympic",
+        "url": "https://www.paralympic.org",
+        "data_types": [
+          "包容性-残奥关联"
+        ]
+      },
+      {
+        "name": "Academic Literature",
+        "sources": [
+          "PubMed",
+          "Br J Sports Med",
+          "Sports Med"
+        ],
+        "data_types": [
+          "安全性-受伤率"
+        ]
+      },
+      {
+        "name": "International Federations",
+        "data_types": [
+          "参与人数",
+          "会员国数量"
+        ]
+      }
+    ]
+  },
+  "ioc_paris_2024": {
+    "total_athletes": 10714,
+    "teams": "204 + EOR + AIN",
+    "events": 329,
+    "gender_parity": true,
+    "gender_ratio": {
+      "male": 0.5,
+      "female": 0.5
+    }
+  },
+  "ipc_paralympic": {
+    "summer_sports_count": 23,
+    "sports_list": [
+      "Para Athletics",
+      "Para Swimming",
+      "Para Badminton",
+      "Wheelchair Basketball",
+      "Blind Football",
+      "Sitting Volleyball",
+      "Para Table Tennis",
+      "Wheelchair Tennis",
+      "Para Taekwondo",
+      "Para Judo",
+      "Para Archery",
+      "Para Cycling",
+      "Para Equestrian",
+      "Para Fencing",
+      "Para Canoe",
+      "Para Rowing",
+      "Shooting Para Sport",
+      "Para Triathlon",
+      "Para Powerlifting",
+      "Boccia",
+      "Goalball",
+      "Wheelchair Rugby",
+      "Para Climbing"
+    ]
+  },
+  "projects": [
+    {
+      "name": "田径",
+      "name_en": "Athletics",
+      "year_added": 1896,
+      "status": "core",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.88,
+          "source": "World Athletics; Paris 2024"
+        },
+        "popularity": {
+          "score": 0.95,
+          "source": "World Athletics; Google Trends"
+        },
+        "sustainability": {
+          "score": 0.7,
+          "source": "项目特性分析"
+        },
+        "inclusivity": {
+          "score": 0.88,
+          "source": "IPC Paris 2024; Olympedia"
+        },
+        "innovation": {
+          "score": 0.35,
+          "source": "Olympedia"
+        },
+        "safety": {
+          "score": 0.75,
+          "source": "Junge et al. (2009) Br J Sports Med"
+        }
+      }
+    },
+    {
+      "name": "游泳",
+      "name_en": "Swimming",
+      "year_added": 1896,
+      "status": "core",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.95,
+          "source": "World Aquatics; Paris 2024"
+        },
+        "popularity": {
+          "score": 0.92,
+          "source": "World Aquatics Annual Report 2022"
+        },
+        "sustainability": {
+          "score": 0.6,
+          "source": "项目特性分析：需要专用游泳馆"
+        },
+        "inclusivity": {
+          "score": 0.85,
+          "source": "IPC Paris 2024; Olympedia"
+        },
+        "innovation": {
+          "score": 0.4,
+          "source": "Olympedia"
+        },
+        "safety": {
+          "score": 0.88,
+          "source": "Mountjoy et al. (2016) Br J Sports Med"
+        }
+      }
+    },
+    {
+      "name": "体操",
+      "name_en": "Gymnastics",
+      "year_added": 1896,
+      "status": "core",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.85,
+          "source": "FIG Annual Report 2023"
+        },
+        "popularity": {
+          "score": 0.88,
+          "source": "FIG 官网统计"
+        },
+        "sustainability": {
+          "score": 0.55,
+          "source": "项目特性分析：需要专用器械"
+        },
+        "inclusivity": {
+          "score": 0.55,
+          "source": "IPC: 体操不在残奥项目中"
+        },
+        "innovation": {
+          "score": 0.45,
+          "source": "Olympedia"
+        },
+        "safety": {
+          "score": 0.62,
+          "source": "Caine et al. (2008) Sports Med"
+        }
+      }
+    },
+    {
+      "name": "篮球",
+      "name_en": "Basketball",
+      "year_added": 1936,
+      "status": "core",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.92,
+          "source": "FIBA; Paris 2024"
+        },
+        "popularity": {
+          "score": 0.93,
+          "source": "FIBA 官网"
+        },
+        "sustainability": {
+          "score": 0.75,
+          "source": "项目特性分析：可使用多功能体育馆"
+        },
+        "inclusivity": {
+          "score": 0.82,
+          "source": "IPC: Wheelchair Basketball"
+        },
+        "innovation": {
+          "score": 0.5,
+          "source": "Olympedia"
+        },
+        "safety": {
+          "score": 0.55,
+          "source": "McKay et al. (2001) J Sci Med Sport"
+        }
+      }
+    },
+    {
+      "name": "足球",
+      "name_en": "Football",
+      "year_added": 1900,
+      "status": "core",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.8,
+          "source": "FIFA; 巴黎奥运男女球队名额差异"
+        },
+        "popularity": {
+          "score": 0.98,
+          "source": "FIFA: 全球第一运动"
+        },
+        "sustainability": {
+          "score": 0.8,
+          "source": "项目特性分析：可使用现有足球场"
+        },
+        "inclusivity": {
+          "score": 0.9,
+          "source": "IPC: Blind Football, 5-a-side"
+        },
+        "innovation": {
+          "score": 0.4,
+          "source": "Olympedia"
+        },
+        "safety": {
+          "score": 0.5,
+          "source": "Junge et al. (2009) Br J Sports Med"
+        }
+      }
+    },
+    {
+      "name": "攀岩",
+      "name_en": "Sport Climbing",
+      "year_added": 2020,
+      "status": "new",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.9,
+          "source": "IFSC; Paris 2024"
+        },
+        "popularity": {
+          "score": 0.68,
+          "source": "IFSC Annual Report 2023"
+        },
+        "sustainability": {
+          "score": 0.6,
+          "source": "项目特性分析：需要攀岩墙"
+        },
+        "inclusivity": {
+          "score": 0.35,
+          "source": "IPC: 攀岩尚未进入残奥会"
+        },
+        "innovation": {
+          "score": 0.95,
+          "source": "Olympedia; 2020东京新增"
+        },
+        "safety": {
+          "score": 0.85,
+          "source": "Schöffl et al. (2018) Wilderness Environ Med"
+        }
+      }
+    },
+    {
+      "name": "冲浪",
+      "name_en": "Surfing",
+      "year_added": 2020,
+      "status": "new",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.9,
+          "source": "ISA; Paris 2024 (Tahiti)"
+        },
+        "popularity": {
+          "score": 0.65,
+          "source": "International Surfing Association"
+        },
+        "sustainability": {
+          "score": 0.85,
+          "source": "项目特性分析：利用天然海浪"
+        },
+        "inclusivity": {
+          "score": 0.25,
+          "source": "IPC: 冲浪尚未进入残奥会"
+        },
+        "innovation": {
+          "score": 0.9,
+          "source": "Olympedia; 2020东京新增"
+        },
+        "safety": {
+          "score": 0.8,
+          "source": "Nathanson et al. (2007) Am J Emerg Med"
+        }
+      }
+    },
+    {
+      "name": "滑板",
+      "name_en": "Skateboarding",
+      "year_added": 2020,
+      "status": "new",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.9,
+          "source": "World Skate; Paris 2024"
+        },
+        "popularity": {
+          "score": 0.72,
+          "source": "World Skate 估计"
+        },
+        "sustainability": {
+          "score": 0.7,
+          "source": "项目特性分析：需要滑板公园"
+        },
+        "inclusivity": {
+          "score": 0.4,
+          "source": "IPC: 滑板尚未进入残奥会"
+        },
+        "innovation": {
+          "score": 0.98,
+          "source": "Olympedia; 青年文化代表"
+        },
+        "safety": {
+          "score": 0.35,
+          "source": "Shuman et al. (2017) Inj Epidemiol"
+        }
+      }
+    },
+    {
+      "name": "霹雳舞",
+      "name_en": "Breaking",
+      "year_added": 2024,
+      "status": "new",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.92,
+          "source": "World DanceSport; Paris 2024"
+        },
+        "popularity": {
+          "score": 0.55,
+          "source": "World DanceSport Federation 估计"
+        },
+        "sustainability": {
+          "score": 0.9,
+          "source": "项目特性分析：仅需平整地面和音乐"
+        },
+        "inclusivity": {
+          "score": 0.45,
+          "source": "IPC: 霹雳舞尚未进入残奥会"
+        },
+        "innovation": {
+          "score": 1.0,
+          "source": "Olympedia; 2024巴黎新增"
+        },
+        "safety": {
+          "score": 0.7,
+          "source": "O'Kane et al. (2011) Int J Sports Phys Ther"
+        }
+      }
+    },
+    {
+      "name": "电子竞技",
+      "name_en": "Esports",
+      "year_added": null,
+      "status": "candidate",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.65,
+          "source": "Newzoo Global Esports Report 2023"
+        },
+        "popularity": {
+          "score": 0.95,
+          "source": "Newzoo 2023; 全球观众超5亿"
+        },
+        "sustainability": {
+          "score": 0.85,
+          "source": "项目特性分析：电子设备，无需物理场馆"
+        },
+        "inclusivity": {
+          "score": 0.55,
+          "source": "非奥运项目; 但全球参与广泛"
+        },
+        "innovation": {
+          "score": 1.0,
+          "source": "2024奥运会电竞节; 数码体育代表"
+        },
+        "safety": {
+          "score": 0.95,
+          "source": "Rudolf et al. (2020) BMJ Open Sport Exerc Med"
+        }
+      }
+    },
+    {
+      "name": "空手道",
+      "name_en": "Karate",
+      "year_added": 2020,
+      "status": "removed_2024",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.9,
+          "source": "WKF; Tokyo 2020"
+        },
+        "popularity": {
+          "score": 0.55,
+          "source": "World Karate Federation"
+        },
+        "sustainability": {
+          "score": 0.9,
+          "source": "项目特性分析：仅需平整场地"
+        },
+        "inclusivity": {
+          "score": 0.5,
+          "source": "IPC: 空手道不在残奥会"
+        },
+        "innovation": {
+          "score": 0.75,
+          "source": "仅2020出现后被移除"
+        },
+        "safety": {
+          "score": 0.6,
+          "source": "Arriaza et al. (2016) Orthop J Sports Med"
+        }
+      }
+    },
+    {
+      "name": "棒球/垒球",
+      "name_en": "Baseball/Softball",
+      "year_added": 1992,
+      "status": "removed_2008_returned_2020",
+      "indicators": {
+        "gender_equity": {
+          "score": 0.8,
+          "source": "WBSC; 棒球(男)垒球(女)分开"
+        },
+        "popularity": {
+          "score": 0.6,
+          "source": "World Baseball Softball Confederation"
+        },
+        "sustainability": {
+          "score": 0.45,
+          "source": "项目特性分析：需要专用球场"
+        },
+        "inclusivity": {
+          "score": 0.4,
+          "source": "主要在美洲和东亚流行"
+        },
+        "innovation": {
+          "score": 0.35,
+          "source": "多次进出奥运"
+        },
+        "safety": {
+          "score": 0.8,
+          "source": "Posner et al. (2011) Am J Sports Med"
+        }
+      }
+    }
+  ],
+  "indicator_definitions": {
+    "gender_equity": {
+      "description": "性别平等评分",
+      "formula": "E_gender = 1 - |male_ratio - 0.5| × 2",
+      "thesis_usage": "评估项目对性别平等的贡献"
+    },
+    "popularity": {
+      "description": "流行度评分",
+      "formula": "E_pop = normalized(global_participation) × 0.5 + normalized(google_trends) × 0.5",
+      "thesis_usage": "评估项目的全球影响力"
+    },
+    "sustainability": {
+      "description": "可持续性代理评分",
+      "formula": "E_sust = 1 - (venue_complexity + equipment_dependency) / 10",
+      "thesis_usage": "评估项目的环境可持续性"
+    },
+    "inclusivity": {
+      "description": "包容性评分",
+      "formula": "E_incl = paralympic_association × 0.5 + developing_country_ratio × 0.5",
+      "thesis_usage": "评估项目对残疾人和发展中国家的包容性"
+    },
+    "innovation": {
+      "description": "创新性评分",
+      "formula": "E_innov = recency_score × 0.6 + yog_presence × 0.4",
+      "thesis_usage": "评估项目的创新性和年轻化程度"
+    },
+    "safety": {
+      "description": "安全性评分",
+      "formula": "E_safety = 1 - normalized(injury_rate)",
+      "thesis_usage": "评估项目的安全风险"
+    }
+  }
+}
