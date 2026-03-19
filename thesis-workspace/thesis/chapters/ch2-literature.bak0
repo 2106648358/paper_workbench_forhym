@@ -17,36 +17,36 @@
 
 对于$n$个指标，构造判断矩阵$A = [a_{ij}]_{n \times n}$，其中$a_{ij}$表示指标$i$相对于指标$j$的重要性。判断矩阵满足以下性质：
 \begin{equation}
-	a_{ij} > 0, \quad a_{ji} = \frac{1}{a_{ij}}, \quad a_{ii} = 1
-	\label{eq:reciprocal}
+a_{ij} > 0, \quad a_{ji} = \frac{1}{a_{ij}}, \quad a_{ii} = 1
+\label{eq:reciprocal}
 \end{equation}
 
 萨蒂提出1至9标度法量化比较结果，如表\ref{tab:scale}所示。标度1表示两元素同等重要，标度3表示前者比后者稍微重要，标度5表示明显重要，标度7表示强烈重要，标度9表示极端重要，偶数标度表示相邻判断的中间值。
 
 \begin{table}[htbp]
-	\centering
-	\caption{萨蒂1-9标度法}
-	\label{tab:scale}
-	\begin{tabular}{cl}
-		\toprule
-		标度      & 含义   \\
-		\midrule
-		1       & 同等重要 \\
-		3       & 稍微重要 \\
-		5       & 明显重要 \\
-		7       & 强烈重要 \\
-		9       & 极端重要 \\
-		2,4,6,8 & 中间值  \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{萨蒂1-9标度法}
+\label{tab:scale}
+\begin{tabular}{cl}
+\toprule
+标度 & 含义 \\
+\midrule
+1 & 同等重要 \\
+3 & 稍微重要 \\
+5 & 明显重要 \\
+7 & 强烈重要 \\
+9 & 极端重要 \\
+2,4,6,8 & 中间值 \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \subsubsection{权重计算}
 
 通过求解特征值问题得到权重向量：
 \begin{equation}
-	AW = \lambda_{\max} W
-	\label{eq:eigenvalue}
+AW = \lambda_{\max} W
+\label{eq:eigenvalue}
 \end{equation}
 其中$\lambda_{\max}$为最大特征值，$W$为对应的特征向量，归一化后即为权重向量。
 
@@ -54,12 +54,12 @@
 
 定义一致性指标和一致性比率检验判断矩阵的合理性：
 \begin{equation}
-	CI = \frac{\lambda_{\max} - n}{n - 1}
-	\label{eq:ci}
+CI = \frac{\lambda_{\max} - n}{n - 1}
+\label{eq:ci}
 \end{equation}
 \begin{equation}
-	CR = \frac{CI}{RI}
-	\label{eq:cr}
+CR = \frac{CI}{RI}
+\label{eq:cr}
 \end{equation}
 其中$RI$为平均随机一致性指标，其值随矩阵阶数变化。当一致性比率小于0.1时，判断矩阵通过一致性检验，否则需要调整判断矩阵。
 
@@ -69,8 +69,8 @@
 
 信息熵是度量不确定性的重要概念，反映了系统的无序程度。信息熵的数学定义为：
 \begin{equation}
-	H(X) = -\sum_{i=1}^{n} p_i \ln p_i
-	\label{eq:entropy}
+H(X) = -\sum_{i=1}^{n} p_i \ln p_i
+\label{eq:entropy}
 \end{equation}
 信息熵具有非负性和极值性两个重要性质。非负性指信息熵恒大于等于零；极值性指当所有状态等概率时熵达到最大值，当某状态概率为1时熵为零。
 
@@ -80,26 +80,26 @@
 
 第一步为数据标准化。对于正向指标，标准化公式为：
 \begin{equation}
-	\tilde{x}_{ij} = \frac{x_{ij} - \min_j x_{ij}}{\max_j x_{ij} - \min_j x_{ij}}
-	\label{eq:normalize}
+\tilde{x}_{ij} = \frac{x_{ij} - \min_j x_{ij}}{\max_j x_{ij} - \min_j x_{ij}}
+\label{eq:normalize}
 \end{equation}
 
 第二步计算比重：
 \begin{equation}
-	p_{ij} = \frac{\tilde{x}_{ij}}{\sum_{i=1}^{n} \tilde{x}_{ij}}
-	\label{eq:proportion}
+p_{ij} = \frac{\tilde{x}_{ij}}{\sum_{i=1}^{n} \tilde{x}_{ij}}
+\label{eq:proportion}
 \end{equation}
 
 第三步计算信息熵：
 \begin{equation}
-	H_j = -\frac{1}{\ln n} \sum_{i=1}^{n} p_{ij} \ln p_{ij}
-	\label{eq:info_entropy}
+H_j = -\frac{1}{\ln n} \sum_{i=1}^{n} p_{ij} \ln p_{ij}
+\label{eq:info_entropy}
 \end{equation}
 
 第四步计算熵权：
 \begin{equation}
-	w_j = \frac{1 - H_j}{\sum_{j=1}^{m} (1 - H_j)}
-	\label{eq:entropy_weight}
+w_j = \frac{1 - H_j}{\sum_{j=1}^{m} (1 - H_j)}
+\label{eq:entropy_weight}
 \end{equation}
 
 熵权反映指标的变异程度。数据差异越大，信息熵越小，表明该指标包含的信息量越大，相应权重也越大。
@@ -114,8 +114,8 @@
 
 线性组合模型将主观权重与客观权重进行加权平均：
 \begin{equation}
-	W = \alpha \cdot W^{AHP} + (1 - \alpha) \cdot W^{EWM}
-	\label{eq:hybrid}
+W = \alpha \cdot W^{AHP} + (1 - \alpha) \cdot W^{EWM}
+\label{eq:hybrid}
 \end{equation}
 其中$\alpha$为组合系数，取值范围为0到1。当$\alpha$等于0.5时，主客观权重同等重要；当$\alpha$大于0.5时，更强调专家的主观判断；当$\alpha$小于0.5时，更依赖数据的客观分布。
 
@@ -134,18 +134,18 @@
 现有奥运项目评估方法各有特点，如表\ref{tab:method_comparison}所示。传统专家评议主观性强但缺乏量化依据；部分学者提出的层次分析与主成分分析相结合的方法适合分类问题；本研究的混合权重模型适合评分排序场景。
 
 \begin{table}[htbp]
-	\centering
-	\caption{奥运项目评估方法对比}
-	\label{tab:method_comparison}
-	\begin{tabular}{lccc}
-		\toprule
-		方法           & 主观性 & 客观性 & 适用场景 \\
-		\midrule
-		专家评议         & 高   & 低   & 传统方法 \\
-		层次分析与主成分分析结合 & 中   & 高   & 分类问题 \\
-		本研究混合模型      & 中   & 中   & 评分排序 \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{奥运项目评估方法对比}
+\label{tab:method_comparison}
+\begin{tabular}{lccc}
+\toprule
+方法 & 主观性 & 客观性 & 适用场景 \\
+\midrule
+专家评议 & 高 & 低 & 传统方法 \\
+层次分析与主成分分析结合 & 中 & 高 & 分类问题 \\
+本研究混合模型 & 中 & 中 & 评分排序 \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 本研究的方法与现有研究的区别在于应用场景不同。现有方法适合项目分类问题，即判断某项目应该入选还是淘汰；本研究的混合权重模型适合项目评分排序问题，为决策者提供量化的评估结果。

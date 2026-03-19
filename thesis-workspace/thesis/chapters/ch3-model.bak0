@@ -11,8 +11,8 @@
 
 综合评分采用加权求和的方式计算：
 \begin{equation}
-	v_i = \sum_{j=1}^{6} w_j \cdot E_{ij}
-	\label{eq:score}
+v_i = \sum_{j=1}^{6} w_j \cdot E_{ij}
+\label{eq:score}
 \end{equation}
 其中$E_{ij}$为项目$i$在维度$j$上的综合值，由该维度下的子指标加权计算得到。权重的确定是整个评估模型的核心，直接决定评估结果的合理性和科学性。
 
@@ -21,21 +21,21 @@
 基于国际奥委会评估标准和相关研究成果，构建六维评价指标体系。表\ref{tab:indicators}详细说明了各维度的含义和衡量要素。
 
 \begin{table}[htbp]
-	\centering
-	\caption{六维评价指标体系}
-	\label{tab:indicators}
-	\begin{tabular}{cll}
-		\toprule
-		编号    & 指标名称 & 说明                 \\
-		\midrule
-		$c_1$ & 流行度  & 观众收视率、参与人数、社交媒体讨论度 \\
-		$c_2$ & 性别平等 & 男女参赛比例、混合项目数量      \\
-		$c_3$ & 可持续性 & 碳排放、场馆成本、资源消耗      \\
-		$c_4$ & 包容性  & 残奥关联、发展中国家参与度      \\
-		$c_5$ & 创新性  & 年轻化程度、技术革新、新近加入    \\
-		$c_6$ & 安全性  & 受伤率、医疗保障需求         \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{六维评价指标体系}
+\label{tab:indicators}
+\begin{tabular}{cll}
+\toprule
+编号 & 指标名称 & 说明 \\
+\midrule
+$c_1$ & 流行度 & 观众收视率、参与人数、社交媒体讨论度 \\
+$c_2$ & 性别平等 & 男女参赛比例、混合项目数量 \\
+$c_3$ & 可持续性 & 碳排放、场馆成本、资源消耗 \\
+$c_4$ & 包容性 & 残奥关联、发展中国家参与度 \\
+$c_5$ & 创新性 & 年轻化程度、技术革新、新近加入 \\
+$c_6$ & 安全性 & 受伤率、医疗保障需求 \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 每个维度下设置若干子指标，形成两层指标体系。第一层为六维主指标，第二层为各维度的细分指标。这种结构既保证了评估的全面性，又便于根据数据可获得性灵活调整。
@@ -46,23 +46,23 @@
 
 邀请$k$位专家对六维指标进行两两比较，得到判断矩阵。矩阵形式如下：
 \begin{equation}
-	A = \begin{bmatrix}
-		1        & a_{12}   & a_{13}   & a_{14}   & a_{15}   & a_{16} \\
-		1/a_{12} & 1        & a_{23}   & a_{24}   & a_{25}   & a_{26} \\
-		1/a_{13} & 1/a_{23} & 1        & a_{34}   & a_{35}   & a_{36} \\
-		1/a_{14} & 1/a_{24} & 1/a_{34} & 1        & a_{45}   & a_{46} \\
-		1/a_{15} & 1/a_{25} & 1/a_{35} & 1/a_{45} & 1        & a_{56} \\
-		1/a_{16} & 1/a_{26} & 1/a_{36} & 1/a_{46} & 1/a_{56} & 1
-	\end{bmatrix}
-	\label{eq:jm}
+A = \begin{bmatrix}
+1 & a_{12} & a_{13} & a_{14} & a_{15} & a_{16} \\
+1/a_{12} & 1 & a_{23} & a_{24} & a_{25} & a_{26} \\
+1/a_{13} & 1/a_{23} & 1 & a_{34} & a_{35} & a_{36} \\
+1/a_{14} & 1/a_{24} & 1/a_{34} & 1 & a_{45} & a_{46} \\
+1/a_{15} & 1/a_{25} & 1/a_{35} & 1/a_{45} & 1 & a_{56} \\
+1/a_{16} & 1/a_{26} & 1/a_{36} & 1/a_{46} & 1/a_{56} & 1
+\end{bmatrix}
+\label{eq:jm}
 \end{equation}
 
 \subsubsection{多专家矩阵整合}
 
 采用几何平均法整合$k$位专家的判断矩阵，消除个体差异的影响：
 \begin{equation}
-	\bar{a}_{ij} = \left( \prod_{l=1}^{k} a_{ij}^{(l)} \right)^{1/k}
-	\label{eq:geomean}
+\bar{a}_{ij} = \left( \prod_{l=1}^{k} a_{ij}^{(l)} \right)^{1/k}
+\label{eq:geomean}
 \end{equation}
 
 几何平均法能够有效综合多位专家的意见，同时保持判断矩阵的互反性质。
@@ -76,21 +76,21 @@
 基于模拟专家访谈数据，得到层次分析法主观权重如表\ref{tab:ahp_weights}所示。
 
 \begin{table}[htbp]
-	\centering
-	\caption{层次分析法主观权重}
-	\label{tab:ahp_weights}
-	\begin{tabular}{ccc}
-		\toprule
-		指标   & 权重    & 排名 \\
-		\midrule
-		流行度  & 0.360 & 1  \\
-		性别平等 & 0.176 & 2  \\
-		安全性  & 0.174 & 3  \\
-		可持续性 & 0.112 & 4  \\
-		包容性  & 0.095 & 5  \\
-		创新性  & 0.063 & 6  \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{层次分析法主观权重}
+\label{tab:ahp_weights}
+\begin{tabular}{ccc}
+\toprule
+指标 & 权重 & 排名 \\
+\midrule
+流行度 & 0.360 & 1 \\
+性别平等 & 0.176 & 2 \\
+安全性 & 0.174 & 3 \\
+可持续性 & 0.112 & 4 \\
+包容性 & 0.095 & 5 \\
+创新性 & 0.063 & 6 \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 一致性比率$CR = 0.0067 < 0.1$，判断矩阵通过一致性检验。
@@ -101,14 +101,14 @@
 
 正向指标采用如下公式标准化：
 \begin{equation}
-	\tilde{x}_{ij} = \frac{x_{ij} - \min_i x_{ij}}{\max_i x_{ij} - \min_i x_{ij}}
-	\label{eq:pos_norm}
+\tilde{x}_{ij} = \frac{x_{ij} - \min_i x_{ij}}{\max_i x_{ij} - \min_i x_{ij}}
+\label{eq:pos_norm}
 \end{equation}
 
 负向指标采用相反的标准化方式：
 \begin{equation}
-	\tilde{x}_{ij} = \frac{\max_i x_{ij} - x_{ij}}{\max_i x_{ij} - \min_i x_{ij}}
-	\label{eq:neg_norm}
+\tilde{x}_{ij} = \frac{\max_i x_{ij} - x_{ij}}{\max_i x_{ij} - \min_i x_{ij}}
+\label{eq:neg_norm}
 \end{equation}
 
 \subsubsection{信息熵与权重计算}
@@ -125,8 +125,8 @@
 
 混合权重采用线性加权方式组合：
 \begin{equation}
-	W = \alpha \cdot W^{AHP} + (1 - \alpha) \cdot W^{EWM}
-	\label{eq:hybrid_weight}
+W = \alpha \cdot W^{AHP} + (1 - \alpha) \cdot W^{EWM}
+\label{eq:hybrid_weight}
 \end{equation}
 
 \subsubsection{混合权重的数学性质}
@@ -144,18 +144,18 @@
 表\ref{tab:weight_comparison}对比了不同权重确定方法的特点。
 
 \begin{table}[htbp]
-	\centering
-	\caption{权重确定方法对比}
-	\label{tab:weight_comparison}
-	\begin{tabular}{lccc}
-		\toprule
-		方法     & 主观性 & 客观性 & 优势     \\
-		\midrule
-		纯层次分析法 & 高   & 低   & 融入专家知识 \\
-		纯熵权法   & 低   & 高   & 数据驱动   \\
-		混合模型   & 中   & 中   & 综合主客观  \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{权重确定方法对比}
+\label{tab:weight_comparison}
+\begin{tabular}{lccc}
+\toprule
+方法 & 主观性 & 客观性 & 优势 \\
+\midrule
+纯层次分析法 & 高 & 低 & 融入专家知识 \\
+纯熵权法 & 低 & 高 & 数据驱动 \\
+混合模型 & 中 & 中 & 综合主客观 \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \subsubsection{模型优势}

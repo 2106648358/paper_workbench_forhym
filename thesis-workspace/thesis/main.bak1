@@ -14,11 +14,11 @@
 \title{基于混合权重模型的奥运项目评估与预测系统设计}
 \author{何艺鸣}
 \date{\today}
-\school{数学与物理学院}
+\school{数理学院}
 \classnum{信息与计算科学}
 \stunum{20221003056}
 \instructorone{李民}
-\instructoronelevel{教授}
+\instructoronelevel{讲师}
 
 % ---------------- 宏包加载 ----------------
 \usepackage{makecell}

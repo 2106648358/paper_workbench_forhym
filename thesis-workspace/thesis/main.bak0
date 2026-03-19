@@ -14,17 +14,17 @@
 \title{基于混合权重模型的奥运项目评估与预测系统设计}
 \author{何艺鸣}
 \date{\today}
-\school{数学与物理学院}
+\school{数理学院}
 \classnum{信息与计算科学}
 \stunum{20221003056}
 \instructorone{李民}
-\instructoronelevel{教授}
+\instructoronelevel{讲师}
 
 % ---------------- 宏包加载 ----------------
 \usepackage{makecell}
 \usepackage{multicol}
 \usepackage{multirow}
-\usepackage[hidelinks]{hyperref}
+\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{algorithm}
@@ -41,6 +41,20 @@
 \maketitle
 \makestatement
 
+% ---------------- 中文摘要 ----------------
+\begin{cnabstract}{奥运项目评估；AHP层次分析法；熵权法；混合权重模型；多准则决策}
+
+奥运项目评估是国际奥委会决策的重要依据，传统评估方法存在主观性强、缺乏量化依据等问题。本文基于2024年HiMCM优秀论文中的AHP-EWM混合模型，构建面向奥运项目评估的决策支持系统。首先，构建包含流行度、性别平等、可持续性、包容性、创新性、安全性六维指标的评价体系；其次，实现AHP主观权重与EWM客观权重的混合计算模块，通过灵敏度分析确定最优组合系数；再次，利用2000-2024年历史奥运数据验证模型准确性，并对2032年布里斯班奥运会项目进行预测；最后，开发交互式Web仪表盘展示评估结果。实验表明，本模型在预测准确率上优于单一权重方法，为IOC决策提供科学依据。
+
+\end{cnabstract}
+
+% ---------------- 英文摘要 ----------------
+\begin{enabstract}{Olympic project evaluation; AHP; Entropy Weight Method; Hybrid weight model; Multi-criteria decision making}
+
+Olympic project evaluation is crucial for International Olympic Committee (IOC) decision-making, yet traditional evaluation methods suffer from subjectivity and lack of quantitative basis. This paper constructs a decision support system for Olympic project evaluation based on the AHP-EWM hybrid model from the 2024 HiMCM competition. First, a six-dimensional evaluation system including popularity, gender equity, sustainability, inclusivity, innovation, and safety is established. Second, a hybrid weight calculation module combining AHP subjective weights and EWM objective weights is implemented, with optimal combination coefficients determined through sensitivity analysis. Third, historical Olympic data from 2000-2024 is used to validate the model's accuracy, and predictions are made for the 2032 Brisbane Olympics. Finally, an interactive web dashboard is developed to display evaluation results. Experimental results demonstrate that the hybrid model outperforms single-weight methods in prediction accuracy, providing scientific support for IOC decisions.
+
+\end{enabstract}
+
 % ---------------- 目录 ----------------
 \makeToc
 
@@ -50,7 +64,7 @@
 
 % ---------------- 第一章 绪论 ----------------
 \begin{spacing}{2}
-	\section{绪论}
+\section{绪论}
 \end{spacing}
 \label{sec:introduction}
 
@@ -58,7 +72,7 @@
 
 % ---------------- 第二章 理论基础与文献综述 ----------------
 \begin{spacing}{2}
-	\section{理论基础与文献综述}
+\section{理论基础与文献综述}
 \end{spacing}
 \label{sec:literature}
 
@@ -66,7 +80,7 @@
 
 % ---------------- 第三章 混合权重评估模型构建 ----------------
 \begin{spacing}{2}
-	\section{混合权重评估模型构建}
+\section{混合权重评估模型构建}
 \end{spacing}
 \label{sec:model}
 
@@ -74,7 +88,7 @@
 
 % ---------------- 第四章 实验设计与数据分析 ----------------
 \begin{spacing}{2}
-	\section{实验设计与数据分析}
+\section{实验设计与数据分析}
 \end{spacing}
 \label{sec:experiments}
 
@@ -82,7 +96,7 @@
 
 % ---------------- 第五章 系统设计与实现 ----------------
 \begin{spacing}{2}
-	\section{系统设计与实现}
+\section{系统设计与实现}
 \end{spacing}
 \label{sec:system}
 
@@ -90,7 +104,7 @@
 
 % ---------------- 第六章 总结与展望 ----------------
 \begin{spacing}{2}
-	\section{总结与展望}
+\section{总结与展望}
 \end{spacing}
 \label{sec:conclusion}
 
@@ -100,7 +114,7 @@
 % 致谢
 % ============================================================
 \begin{spacing}{2}
-	\section*{致谢}
+\section*{致谢}
 \end{spacing}
 \phantomsection
 \addcontentsline{toc}{section}{致谢}
