@@ -8,11 +8,9 @@ interface LayoutProps {
 }
 
 const steps = [
-  { id: 1, name: 'AHP权重', path: '/ahp' },
-  { id: 2, name: 'EWM权重', path: '/ewm' },
-  { id: 3, name: '混合权重', path: '/hybrid' },
-  { id: 4, name: '项目评估', path: '/projects' },
-  { id: 5, name: '预测推荐', path: '/prediction' },
+  { id: 1, name: '权重分析', path: '/weights' },
+  { id: 2, name: '项目评估', path: '/projects' },
+  { id: 3, name: '预测推荐', path: '/prediction' },
 ];
 
 export default function Layout({ children, currentStep, onStepChange }: LayoutProps) {
@@ -30,7 +28,6 @@ export default function Layout({ children, currentStep, onStepChange }: LayoutPr
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 移动端顶部栏 */}
       {isMobile && (
         <header className="fixed top-0 left-0 right-0 h-12 bg-white border-b border-gray-200 z-30 flex items-center px-4">
           <button
