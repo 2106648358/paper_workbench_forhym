@@ -1,35 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
+  /* Claude Design System Colors */
+  --color-brand: #c96442;
+  --color-brand-light: #d97757;
+  --color-parchment: #f5f4ed;
+  --color-ivory: #faf9f5;
+  --color-near-black: #141413;
+  --color-olive-gray: #5e5d59;
+  --color-stone-gray: #87867f;
+  --color-border-cream: #f0eee6;
+  --color-warm-sand: #e8e6dc;
+  --color-dark-surface: #30302e;
+  --color-charcoal-warm: #4d4c48;
+  --color-ring-warm: #d1cfc5;
+  --color-focus-blue: #3898ec;
+  --color-error: #b53333;
+
+  /* Semantic Colors */
   --success: #22c55e;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --border: #e2e8f0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --border: #334155;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-parchment);
+  color: var(--color-near-black);
 }
 
 #root {
   min-height: 100vh;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Ring Shadow for Interactive Elements */
+.ring-shadow {
+  box-shadow: 0px 0px 0px 1px var(--color-ring-warm);
+}
+
+.ring-shadow-hover:hover {
+  box-shadow: 0px 0px 0px 1px var(--color-ring-warm);
+}
+
+/* Whisper Shadow for Elevated Content */
+.whisper-shadow {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 24px;
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--color-focus-blue);
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-warm-sand);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-olive-gray);
+}
+
+/* Smooth Transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: ease;
+  transition-duration: 150ms;
+}
+
+/* Input and Button Base Styles */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Button Reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
 }

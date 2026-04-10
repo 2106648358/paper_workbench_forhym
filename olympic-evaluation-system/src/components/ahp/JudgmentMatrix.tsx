@@ -10,12 +10,12 @@ interface JudgmentMatrixProps {
 }
 
 const DIMENSION_COLORS: string[] = [
-  '#3b82f6',
-  '#22c55e',
-  '#f59e0b',
-  '#8b5cf6',
-  '#f97316',
-  '#ef4444',
+  '#c96442',
+  '#d97757',
+  '#5e5d59',
+  '#87867f',
+  '#4d4c48',
+  '#3d3d3a',
 ];
 
 export default function JudgmentMatrix({
@@ -40,16 +40,23 @@ export default function JudgmentMatrix({
   const getColor = (index: number) => DIMENSION_COLORS[index % DIMENSION_COLORS.length];
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+    <div 
+      className="rounded-xl p-5"
+      style={{ 
+        backgroundColor: '#faf9f5', 
+        border: '1px solid #f0eee6',
+        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 4px 24px'
+      }}
+    >
       <div className="overflow-x-auto">
         <table className="border-collapse text-xs mx-auto">
           <thead>
             <tr>
               <th className="w-6"></th>
               {dimensions.map((dim, i) => (
-                <th key={dim.id} className="px-1 py-1 text-center" title={dim.name}>
+                <th key={dim.id} className="px-2 py-2 text-center" title={dim.name}>
                   <div
-                    className="w-3 h-3 rounded-full mx-auto"
+                    className="w-4 h-4 rounded-full mx-auto"
                     style={{ backgroundColor: getColor(i) }}
                   />
                 </th>
@@ -59,9 +66,9 @@ export default function JudgmentMatrix({
           <tbody>
             {matrix.map((row, i) => (
               <tr key={dimensions[i].id}>
-                <td className="py-0.5">
+                <td className="py-1">
                   <div
-                    className="w-3 h-3 rounded-full"
+                    className="w-4 h-4 rounded-full"
                     style={{ backgroundColor: getColor(i) }}
                     title={dimensions[i].name}
                   />
@@ -72,9 +79,11 @@ export default function JudgmentMatrix({
                   return (
                     <td
                       key={j}
-                      className={`px-1 py-0.5 text-center border ${
-                        isDiagonal ? 'bg-gray-100' : 'bg-white'
-                      }`}
+                      className="px-1 py-1 text-center"
+                      style={{
+                        backgroundColor: isDiagonal ? '#e8e6dc' : '#faf9f5',
+                        border: '1px solid #f0eee6',
+                      }}
                     >
                       {isEditable ? (
                         <input
@@ -82,10 +91,17 @@ export default function JudgmentMatrix({
                           step="0.01"
                           value={cell.toFixed(2)}
                           onChange={(e) => handleCellChange(i, j, e.target.value)}
-                          className="w-10 text-center border rounded px-0.5 py-0.5 text-[10px]"
+                          className="w-12 text-center rounded-lg px-1 py-1 text-[10px]"
+                          style={{
+                            backgroundColor: '#faf9f5',
+                            border: '1px solid #f0eee6',
+                            color: '#141413',
+                          }}
                         />
                       ) : (
-                        <span className="text-gray-600 tabular-nums">{cell.toFixed(2)}</span>
+                        <span className="tabular-nums" style={{ color: '#5e5d59' }}>
+                          {cell.toFixed(2)}
+                        </span>
                       )}
                     </td>
                   );
@@ -96,13 +112,17 @@ export default function JudgmentMatrix({
         </table>
       </div>
 
-      <div className={`mt-2 px-2 py-1 rounded text-[10px] text-center ${
-        result.consistency?.passed ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
-      }`}>
-        CR={result.consistency?.CR?.toFixed(4)} {result.consistency?.passed ? '✓' : '✗'}
+      <div 
+        className="mt-3 px-3 py-2 rounded-lg text-xs text-center font-medium"
+        style={{
+          backgroundColor: result.consistency?.passed ? '#22c55e' : '#ef4444',
+          color: '#ffffff',
+        }}
+      >
+        CR = {result.consistency?.CR?.toFixed(4)} {result.consistency?.passed ? '✓ 一致性检验通过' : '✗ 需要调整'}
       </div>
 
-      <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-500 justify-center">
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[10px] justify-center" style={{ color: '#87867f' }}>
         {dimensions.map((dim, i) => (
           <div key={dim.id} className="flex items-center gap-1">
             <div

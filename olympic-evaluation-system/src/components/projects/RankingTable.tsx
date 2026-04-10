@@ -10,6 +10,11 @@ interface RankingTableProps {
 type SortField = 'rank' | 'name' | 'score' | 'probability';
 type SortOrder = 'asc' | 'desc';
 
+function SortIcon({ field, sortField, sortOrder }: { field: SortField; sortField: SortField; sortOrder: SortOrder }) {
+  if (sortField !== field) return <span style={{ color: '#d1cfc5' }}>↕</span>;
+  return <span style={{ color: '#c96442' }}>{sortOrder === 'asc' ? '↑' : '↓'}</span>;
+}
+
 export default function RankingTable({ projects, selectedIds, onSelect }: RankingTableProps) {
   const [sortField, setSortField] = useState<SortField>('rank');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
@@ -62,35 +67,68 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
   };
 
   const getProbabilityColor = (prob: number | undefined) => {
-    if (!prob) return 'text-gray-400';
-    if (prob >= 0.7) return 'text-green-600';
-    if (prob >= 0.4) return 'text-yellow-600';
-    return 'text-red-600';
+    if (!prob) return '#87867f';
+    if (prob >= 0.7) return '#22c55e';
+    if (prob >= 0.4) return '#f59e0b';
+    return '#ef4444';
   };
 
   const getStatusBadge = (project: Project) => {
     if (project.yearRemoved) {
-      return <span className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded">已移除</span>;
+      return (
+        <span 
+          className="px-2 py-1 text-xs rounded-lg"
+          style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}
+        >
+          已移除
+        </span>
+      );
     }
     if (project.yearAdded === null) {
-      return <span className="px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded">候选</span>;
+      return (
+        <span 
+          className="px-2 py-1 text-xs rounded-lg"
+          style={{ backgroundColor: '#f3e8ff', color: '#9333ea' }}
+        >
+          候选
+        </span>
+      );
     }
     if (project.yearAdded && project.yearAdded >= 2020) {
-      return <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">新增</span>;
+      return (
+        <span 
+          className="px-2 py-1 text-xs rounded-lg"
+          style={{ backgroundColor: '#dcfce7', color: '#16a34a' }}
+        >
+          新增
+        </span>
+      );
     }
-    return <span className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">核心</span>;
-  };
-
-  const SortIcon = ({ field }: { field: SortField }) => {
-    if (sortField !== field) return <span className="text-gray-300">↕</span>;
-    return <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>;
+    return (
+      <span 
+        className="px-2 py-1 text-xs rounded-lg"
+        style={{ backgroundColor: '#dbeafe', color: '#2563eb' }}
+      >
+        核心
+      </span>
+    );
   };
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-        <h3 className="text-lg font-semibold">项目排名</h3>
-        <div className="flex items-center gap-2 text-sm text-gray-500">
+    <div 
+      className="rounded-xl overflow-hidden"
+      style={{ 
+        backgroundColor: '#faf9f5', 
+        border: '1px solid #f0eee6',
+        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 4px 24px'
+      }}
+    >
+      <div 
+        className="px-6 py-4 flex items-center justify-between"
+        style={{ borderBottom: '1px solid #f0eee6' }}
+      >
+        <h3 className="text-lg font-semibold font-serif" style={{ color: '#141413' }}>项目排名</h3>
+        <div className="flex items-center gap-3 text-sm" style={{ color: '#5e5d59' }}>
           <span>共 {sortedProjects.length} 项</span>
           <select
             value={pageSize}
@@ -98,7 +136,12 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
               setPageSize(Number(e.target.value));
               setCurrentPage(1);
             }}
-            className="border rounded px-2 py-1 text-sm"
+            className="rounded-lg px-3 py-1.5 text-sm"
+            style={{
+              backgroundColor: '#e8e6dc',
+              border: '1px solid #f0eee6',
+              color: '#4d4c48',
+            }}
           >
             <option value={5}>5条/页</option>
             <option value={10}>10条/页</option>
@@ -109,42 +152,64 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">选择</th>
+        <table className="min-w-full">
+          <thead>
+            <tr style={{ backgroundColor: '#e8e6dc' }}>
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#5e5d59' }}>
+                选择
+              </th>
               <th
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('rank')}
+                style={{ color: '#5e5d59' }}
               >
-                排名 <SortIcon field="rank" />
+                排名 <SortIcon field="rank" sortField={sortField} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('name')}
+                style={{ color: '#5e5d59' }}
               >
-                项目 <SortIcon field="name" />
+                项目 <SortIcon field="name" sortField={sortField} sortOrder={sortOrder} />
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#5e5d59' }}>
+                状态
+              </th>
               <th
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('score')}
+                style={{ color: '#5e5d59' }}
               >
-                综合评分 <SortIcon field="score" />
+                综合评分 <SortIcon field="score" sortField={sortField} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('probability')}
+                style={{ color: '#5e5d59' }}
               >
-                入选概率 <SortIcon field="probability" />
+                入选概率 <SortIcon field="probability" sortField={sortField} sortOrder={sortOrder} />
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody>
             {paginatedProjects.map((project) => (
               <tr
                 key={project.id}
-                className={`hover:bg-gray-50 cursor-pointer ${selectedIds.includes(project.id) ? 'bg-blue-50' : ''}`}
+                className="cursor-pointer transition-colors"
+                style={{ 
+                  borderBottom: '1px solid #f0eee6',
+                  backgroundColor: selectedIds.includes(project.id) ? '#fef3ee' : 'transparent',
+                }}
+                onMouseEnter={(e) => {
+                  if (!selectedIds.includes(project.id)) {
+                    e.currentTarget.style.backgroundColor = '#f5f4ed';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!selectedIds.includes(project.id)) {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
                 onClick={() => onSelect(project.id)}
               >
                 <td className="px-4 py-3">
@@ -152,24 +217,25 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
                     type="checkbox"
                     checked={selectedIds.includes(project.id)}
                     onChange={() => onSelect(project.id)}
-                    className="rounded border-gray-300"
+                    className="rounded"
+                    style={{ accentColor: '#c96442' }}
                   />
                 </td>
-                <td className="px-4 py-3 text-sm font-medium text-gray-900">#{project.rank}</td>
+                <td className="px-4 py-3 text-sm font-medium" style={{ color: '#141413' }}>
+                  #{project.rank}
+                </td>
                 <td className="px-4 py-3">
                   <div>
-                    <div className="text-sm font-medium text-gray-900">{project.name}</div>
-                    <div className="text-xs text-gray-500">{project.nameEn}</div>
+                    <div className="text-sm font-medium" style={{ color: '#141413' }}>{project.name}</div>
+                    <div className="text-xs" style={{ color: '#87867f' }}>{project.nameEn}</div>
                   </div>
                 </td>
                 <td className="px-4 py-3">{getStatusBadge(project)}</td>
-                <td className="px-4 py-3">
-                  <div className="text-sm font-medium text-gray-900">{project.score?.toFixed(3) || '-'}</div>
+                <td className="px-4 py-3 text-sm font-medium" style={{ color: '#141413' }}>
+                  {project.score?.toFixed(3) || '-'}
                 </td>
-                <td className="px-4 py-3">
-                  <span className={`text-sm font-medium ${getProbabilityColor(project.probability)}`}>
-                    {project.probability ? `${(project.probability * 100).toFixed(0)}%` : '-'}
-                  </span>
+                <td className="px-4 py-3 text-sm font-medium" style={{ color: getProbabilityColor(project.probability) }}>
+                  {project.probability ? `${(project.probability * 100).toFixed(0)}%` : '-'}
                 </td>
               </tr>
             ))}
@@ -178,15 +244,22 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
       </div>
 
       {totalPages > 1 && (
-        <div className="px-6 py-3 border-t border-gray-200 flex items-center justify-between">
-          <div className="text-sm text-gray-500">
+        <div 
+          className="px-6 py-3 flex items-center justify-between"
+          style={{ borderTop: '1px solid #f0eee6' }}
+        >
+          <div className="text-sm" style={{ color: '#5e5d59' }}>
             显示 {(currentPage - 1) * pageSize + 1}-{Math.min(currentPage * pageSize, sortedProjects.length)} 条，共 {sortedProjects.length} 条
           </div>
           <div className="flex gap-1">
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              className="px-3 py-1.5 text-sm rounded-lg transition-colors disabled:opacity-50"
+              style={{ 
+                backgroundColor: '#e8e6dc', 
+                color: '#4d4c48',
+              }}
             >
               上一页
             </button>
@@ -196,7 +269,11 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 text-sm border rounded ${currentPage === page ? 'bg-blue-600 text-white' : 'hover:bg-gray-50'}`}
+                  className="px-3 py-1.5 text-sm rounded-lg transition-colors"
+                  style={{ 
+                    backgroundColor: currentPage === page ? '#c96442' : '#e8e6dc',
+                    color: currentPage === page ? '#faf9f5' : '#4d4c48',
+                  }}
                 >
                   {page}
                 </button>
@@ -205,7 +282,11 @@ export default function RankingTable({ projects, selectedIds, onSelect }: Rankin
             <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              className="px-3 py-1.5 text-sm rounded-lg transition-colors disabled:opacity-50"
+              style={{ 
+                backgroundColor: '#e8e6dc', 
+                color: '#4d4c48',
+              }}
             >
               下一页
             </button>

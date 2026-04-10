@@ -27,18 +27,24 @@ export default function Layout({ children, currentStep, onStepChange }: LayoutPr
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#f5f4ed' }}>
       {isMobile && (
-        <header className="fixed top-0 left-0 right-0 h-12 bg-white border-b border-gray-200 z-30 flex items-center px-4">
+        <header 
+          className="fixed top-0 left-0 right-0 h-12 z-30 flex items-center px-4"
+          style={{ backgroundColor: '#faf9f5', borderBottom: '1px solid #f0eee6' }}
+        >
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1.5 rounded hover:bg-gray-100"
+            className="p-1.5 rounded-lg transition-colors hover:bg-gray-100"
+            style={{ borderRadius: '8px' }}
           >
-            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" style={{ color: '#4d4c48' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <span className="ml-3 text-sm font-medium text-gray-800">奥运项目评估与预测系统</span>
+          <span className="ml-3 text-sm font-medium font-serif" style={{ color: '#141413' }}>
+            奥运项目评估与预测系统
+          </span>
         </header>
       )}
 
@@ -53,7 +59,9 @@ export default function Layout({ children, currentStep, onStepChange }: LayoutPr
         isMobile={isMobile}
       />
       
-      <main className={`transition-all duration-300 p-4 lg:p-6 ${isMobile ? 'pt-16 ml-0' : 'lg:ml-64'}`}>
+      <main 
+        className={`transition-all duration-300 p-4 lg:p-6 ${isMobile ? 'pt-16 ml-0' : 'lg:ml-64'}`}
+      >
         <div className="max-w-6xl mx-auto">
           {children}
         </div>
@@ -61,7 +69,8 @@ export default function Layout({ children, currentStep, onStepChange }: LayoutPr
 
       {isMobile && sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="fixed inset-0 z-30"
+          style={{ backgroundColor: 'rgba(20, 20, 19, 0.5)' }}
           onClick={() => setSidebarOpen(false)}
         />
       )}

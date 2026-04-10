@@ -8,6 +8,8 @@ interface PieChartProps {
   enable3D?: boolean;
 }
 
+const CHART_COLORS = ['#c96442', '#d97757', '#5e5d59', '#87867f', '#4d4c48', '#3d3d3a'];
+
 export default function PieChart({ data, title, height = 300, enable3D = false }: PieChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
@@ -30,11 +32,20 @@ export default function PieChart({ data, title, height = 300, enable3D = false }
         ? {
             text: title,
             left: 'center',
-            textStyle: { fontSize: 14, fontWeight: 600 },
+            textStyle: { 
+              fontSize: 14, 
+              fontWeight: 600,
+              fontFamily: "'Playfair Display', Georgia, serif",
+              color: '#141413'
+            },
           }
         : undefined,
       tooltip: {
         trigger: 'item',
+        backgroundColor: '#faf9f5',
+        borderColor: '#f0eee6',
+        borderWidth: 1,
+        textStyle: { color: '#141413' },
         formatter: (params: unknown) => {
           const p = params as { name: string; value: number; percent: number };
           return `${p.name}<br/>权重: ${(p.value / 100).toFixed(4)} (${p.percent.toFixed(1)}%)`;
@@ -44,7 +55,7 @@ export default function PieChart({ data, title, height = 300, enable3D = false }
         orient: 'vertical',
         right: 10,
         top: 'center',
-        textStyle: { fontSize: 11 },
+        textStyle: { fontSize: 11, color: '#5e5d59' },
       },
       series: [
         {
@@ -53,31 +64,33 @@ export default function PieChart({ data, title, height = 300, enable3D = false }
           center: ['40%', '50%'],
           avoidLabelOverlap: true,
           itemStyle: {
-            borderRadius: 4,
-            borderColor: '#fff',
+            borderRadius: 6,
+            borderColor: '#faf9f5',
             borderWidth: 2,
           },
           label: {
             show: true,
             formatter: '{b}\n{d}%',
             fontSize: 10,
+            color: '#5e5d59',
           },
           labelLine: {
             show: true,
             length: 10,
             length2: 10,
+            lineStyle: { color: '#d1cfc5' },
           },
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.3)',
+              shadowColor: 'rgba(0, 0, 0, 0.15)',
             },
           },
           data: chartData,
         },
       ],
-      color: ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'],
+      color: CHART_COLORS,
     };
 
     chartInstance.current.setOption(option);
@@ -97,14 +110,23 @@ export default function PieChart({ data, title, height = 300, enable3D = false }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
-      <div className="flex items-center justify-between mb-2">
-        {title && <h4 className="text-sm font-semibold">{title}</h4>}
+    <div 
+      className="rounded-xl p-5"
+      style={{ 
+        backgroundColor: '#faf9f5', 
+        border: '1px solid #f0eee6',
+        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 4px 24px'
+      }}
+    >
+      <div className="flex items-center justify-between mb-3">
+        {title && <h4 className="text-sm font-semibold font-serif" style={{ color: '#141413' }}>{title}</h4>}
         <button
           onClick={toggle3D}
-          className={`px-2 py-1 text-xs rounded transition-colors ${
-            is3D ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-          }`}
+          className="px-3 py-1.5 text-xs rounded-lg transition-colors"
+          style={{
+            backgroundColor: is3D ? '#c96442' : '#e8e6dc',
+            color: is3D ? '#faf9f5' : '#5e5d59',
+          }}
         >
           {is3D ? '2D' : '3D'}
         </button>

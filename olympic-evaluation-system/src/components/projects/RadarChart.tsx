@@ -6,6 +6,8 @@ interface RadarChartProps {
   dimensions: Dimension[];
 }
 
+const CHART_COLORS = ['#c96442', '#d97757', '#5e5d59', '#87867f', '#4d4c48'];
+
 export default function RadarChart({ data, dimensions }: RadarChartProps) {
   const chartData = useMemo(() => {
     return {
@@ -13,8 +15,8 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
       datasets: data.map((item, index) => ({
         label: item.name,
         data: dimensions.map((d) => item.indicators[d.id as keyof Indicators] || 0),
-        borderColor: ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'][index % 5],
-        backgroundColor: ['rgba(59, 130, 246, 0.2)', 'rgba(239, 68, 68, 0.2)', 'rgba(34, 197, 94, 0.2)', 'rgba(245, 158, 11, 0.2)', 'rgba(139, 92, 246, 0.2)'][index % 5],
+        borderColor: CHART_COLORS[index % 5],
+        backgroundColor: CHART_COLORS[index % 5] + '33',
       })),
     };
   }, [data, dimensions]);
@@ -44,13 +46,23 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold mb-2">六维指标雷达图</h3>
-      <p className="text-sm text-gray-500 mb-4">展示选中项目的六维指标分布，便于对比分析</p>
+    <div 
+      className="rounded-xl p-6"
+      style={{ 
+        backgroundColor: '#faf9f5', 
+        border: '1px solid #f0eee6',
+        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 4px 24px'
+      }}
+    >
+      <h3 className="text-lg font-semibold font-serif mb-2" style={{ color: '#141413' }}>
+        六维指标雷达图
+      </h3>
+      <p className="text-sm mb-4" style={{ color: '#5e5d59' }}>
+        展示选中项目的六维指标分布，便于对比分析
+      </p>
 
       <div className="flex justify-center">
         <svg width="400" height="400" viewBox="0 0 400 400">
-          {/* Grid circles with labels */}
           {[0.25, 0.5, 0.75, 1].map((level) => (
             <g key={level}>
               <circle
@@ -58,7 +70,7 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
                 cy={centerY}
                 r={radius * level}
                 fill="none"
-                stroke="#e5e7eb"
+                stroke="#e8e6dc"
                 strokeWidth="1"
                 strokeDasharray={level === 1 ? '0' : '4'}
               />
@@ -66,7 +78,8 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
                 <text
                   x={centerX + 5}
                   y={centerY - radius * level}
-                  className="text-[10px] fill-gray-400"
+                  fontSize="10"
+                  fill="#87867f"
                 >
                   {(level * 100).toFixed(0)}
                 </text>
@@ -74,7 +87,6 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
             </g>
           ))}
 
-          {/* Axis lines */}
           {dimensions.map((_, index) => {
             const pos = getPointPosition(index, 1);
             return (
@@ -84,16 +96,15 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
                 y1={centerY}
                 x2={pos.x}
                 y2={pos.y}
-                stroke="#d1d5db"
+                stroke="#d1cfc5"
                 strokeWidth="1"
               />
             );
           })}
 
-          {/* Dimension labels with background */}
           {dimensions.map((dim, index) => {
             const pos = getLabelPosition(index, 1.25);
-            const textWidth = dim.name.length * 7 + 10;
+            const textWidth = dim.name.length * 14 + 12;
             return (
               <g key={dim.id}>
                 <rect
@@ -101,16 +112,18 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
                   y={pos.y - 10}
                   width={textWidth}
                   height={20}
-                  rx={4}
-                  fill="white"
-                  stroke="#e5e7eb"
+                  rx={6}
+                  fill="#faf9f5"
+                  stroke="#e8e6dc"
                 />
                 <text
                   x={pos.x}
                   y={pos.y}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  className="text-xs font-medium fill-gray-700"
+                  fontSize="12"
+                  fontWeight="500"
+                  fill="#4d4c48"
                 >
                   {dim.name}
                 </text>
@@ -118,7 +131,6 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
             );
           })}
 
-          {/* Data polygons with animation */}
           {chartData.datasets.map((dataset, datasetIndex) => (
             <g key={datasetIndex}>
               <polygon
@@ -131,9 +143,8 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
                 fill={dataset.backgroundColor}
                 stroke={dataset.borderColor}
                 strokeWidth="2"
-                className="transition-all duration-300"
+                style={{ transition: 'all 0.3s ease' }}
               />
-              {/* Data points with values */}
               {dataset.data.map((value, index) => {
                 const pos = getPointPosition(index, value);
                 return (
@@ -141,16 +152,18 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
                     <circle
                       cx={pos.x}
                       cy={pos.y}
-                      r={4}
+                      r={5}
                       fill={dataset.borderColor}
-                      stroke="white"
+                      stroke="#faf9f5"
                       strokeWidth={2}
                     />
                     <text
                       x={pos.x}
                       y={pos.y - 10}
                       textAnchor="middle"
-                      className="text-[9px] font-medium fill-gray-600"
+                      fontSize="9"
+                      fontWeight="500"
+                      fill="#5e5d59"
                     >
                       {value.toFixed(2)}
                     </text>
@@ -162,7 +175,6 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
         </svg>
       </div>
 
-      {/* Legend */}
       <div className="flex justify-center gap-4 mt-4 flex-wrap">
         {data.map((item, index) => (
           <div key={item.name} className="flex items-center gap-2">
@@ -170,7 +182,7 @@ export default function RadarChart({ data, dimensions }: RadarChartProps) {
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: chartData.datasets[index].borderColor }}
             />
-            <span className="text-sm text-gray-600">{item.name}</span>
+            <span className="text-sm" style={{ color: '#5e5d59' }}>{item.name}</span>
           </div>
         ))}
       </div>

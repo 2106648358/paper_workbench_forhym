@@ -75,15 +75,23 @@ export default function EWMCalculationViewer({
 
   return (
     <div className="space-y-6">
-      {/* 主结果卡片 */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div 
+        className="rounded-xl p-6"
+        style={{ 
+          backgroundColor: '#faf9f5', 
+          border: '1px solid #f0eee6',
+          boxShadow: 'rgba(0, 0, 0, 0.05) 0px 4px 24px'
+        }}
+      >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <h3 className="text-lg font-semibold">EWM 客观权重</h3>
-            {/* 信息图标 + Tooltip */}
+            <h3 className="text-lg font-semibold font-serif" style={{ color: '#141413' }}>
+              EWM 客观权重
+            </h3>
             <div className="relative group">
               <svg
-                className="w-4 h-4 text-gray-400 cursor-help hover:text-gray-600"
+                className="w-4 h-4 cursor-help"
+                style={{ color: '#87867f' }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -95,38 +103,58 @@ export default function EWMCalculationViewer({
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              {/* Tooltip - 向下显示 */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-60 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div 
+                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-60 p-3 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                style={{ 
+                  backgroundColor: '#30302e', 
+                  color: '#faf9f5',
+                }}
+              >
                 <div className="font-medium mb-2 text-center">EWM 核心原理</div>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-green-400">●</span>
+                    <span style={{ color: '#22c55e' }}>●</span>
                     <span>数据差异大 → 权重高</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-amber-400">●</span>
+                    <span style={{ color: '#d97757' }}>●</span>
                     <span>数据差异小 → 权重低</span>
                   </div>
                 </div>
-                <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45" />
+                <div 
+                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+                  style={{ backgroundColor: '#30302e' }}
+                />
               </div>
             </div>
           </div>
           <button
             onClick={handleRecalculate}
             disabled={isCalculating}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 rounded-lg transition-all"
+            style={{
+              backgroundColor: isCalculating ? '#87867f' : '#c96442',
+              color: '#faf9f5',
+            }}
           >
             {isCalculating ? '计算中...' : '重新计算'}
           </button>
         </div>
 
-        {/* 计算进度条 */}
         {isCalculating && (
-          <div className="mb-6 p-4 bg-blue-50 rounded-lg">
+          <div 
+            className="mb-6 p-4 rounded-xl"
+            style={{ backgroundColor: '#fef3ee' }}
+          >
             <div className="flex items-center gap-3 mb-3">
-              <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
-              <span className="text-sm font-medium text-blue-700">
+              <div 
+                className="animate-spin rounded-full h-5 w-5 border-2"
+                style={{ 
+                  borderColor: '#c96442', 
+                  borderTopColor: 'transparent' 
+                }}
+              />
+              <span className="text-sm font-medium" style={{ color: '#c96442' }}>
                 正在执行: {calcSteps.find(s => s.id === calcStep)?.label}
               </span>
             </div>
@@ -134,16 +162,23 @@ export default function EWMCalculationViewer({
               {calcSteps.map((step) => (
                 <div key={step.id} className="flex-1 flex items-center gap-1">
                   <div
-                    className={`w-full h-1.5 rounded-full transition-colors ${
-                      step.id <= calcStep ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
+                    className="h-1.5 rounded-full transition-colors"
+                    style={{
+                      backgroundColor: step.id <= calcStep ? '#c96442' : '#e8e6dc',
+                    }}
                   />
                 </div>
               ))}
             </div>
-            <div className="flex justify-between mt-2 text-xs text-gray-500">
+            <div className="flex justify-between mt-2 text-xs" style={{ color: '#5e5d59' }}>
               {calcSteps.map((step) => (
-                <span key={step.id} className={step.id === calcStep ? 'text-blue-600 font-medium' : ''}>
+                <span 
+                  key={step.id} 
+                  style={{ 
+                    color: step.id === calcStep ? '#c96442' : '#87867f',
+                    fontWeight: step.id === calcStep ? 500 : 400 
+                  }}
+                >
                   {step.label}
                 </span>
               ))}
@@ -151,15 +186,26 @@ export default function EWMCalculationViewer({
           </div>
         )}
 
-        {/* 饼图 / 加载动画 */}
         <div className="flex justify-center">
           {isCalculating ? (
-            <div className="flex flex-col items-center justify-center bg-gray-50 rounded-lg" style={{ height: 320, width: '100%', maxWidth: 500 }}>
+            <div 
+              className="flex flex-col items-center justify-center rounded-xl" 
+              style={{ height: 320, width: '100%', maxWidth: 500, backgroundColor: '#e8e6dc' }}
+            >
               <div className="relative w-32 h-32">
-                <div className="absolute inset-0 border-4 border-gray-200 rounded-full" />
-                <div className="absolute inset-0 border-4 border-purple-500 rounded-full animate-spin border-t-transparent" />
+                <div 
+                  className="absolute inset-0 rounded-full"
+                  style={{ border: '4px solid #d1cfc5' }}
+                />
+                <div 
+                  className="absolute inset-0 rounded-full animate-spin"
+                  style={{ 
+                    border: '4px solid transparent',
+                    borderTopColor: '#c96442' 
+                  }}
+                />
               </div>
-              <p className="mt-4 text-sm text-gray-500">计算中...</p>
+              <p className="mt-4 text-sm" style={{ color: '#5e5d59' }}>计算中...</p>
             </div>
           ) : (
             <div style={{ width: '100%', maxWidth: 500 }}>
@@ -169,10 +215,13 @@ export default function EWMCalculationViewer({
         </div>
       </div>
 
-      {/* 查看详情按钮 */}
       <button
         onClick={() => setShowDetails(!showDetails)}
-        className="w-full py-3 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-600 transition-colors flex items-center justify-center gap-2"
+        className="w-full py-3 rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+        style={{ 
+          backgroundColor: '#e8e6dc', 
+          color: '#4d4c48',
+        }}
       >
         {showDetails ? '收起详情' : '查看详情'}
         <svg
@@ -185,30 +234,44 @@ export default function EWMCalculationViewer({
         </svg>
       </button>
 
-      {/* 详细内容（默认隐藏） */}
       {showDetails && (
-        <div className="bg-white rounded-lg shadow p-6 space-y-6">
-          <h4 className="font-semibold text-gray-700 border-b pb-2">计算过程详情</h4>
+        <div 
+          className="rounded-xl p-6 space-y-6"
+          style={{ 
+            backgroundColor: '#faf9f5', 
+            border: '1px solid #f0eee6',
+            boxShadow: 'rgba(0, 0, 0, 0.05) 0px 4px 24px'
+          }}
+        >
+          <h4 className="font-semibold font-serif pb-2" style={{ color: '#141413', borderBottom: '1px solid #f0eee6' }}>
+            计算过程详情
+          </h4>
           
-          {/* 信息熵值 */}
           <div>
-            <h5 className="text-sm font-medium text-gray-600 mb-3">各指标信息熵</h5>
+            <h5 className="text-sm font-medium mb-3" style={{ color: '#4d4c48' }}>各指标信息熵</h5>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {weightList.map((item) => {
                 const D = 1 - item.entropy;
                 return (
-                  <div key={item.id} className="p-3 bg-gray-50 rounded-lg">
-                    <div className="text-sm font-medium mb-2">{item.name}</div>
-                    <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <div 
+                    key={item.id} 
+                    className="p-3 rounded-xl"
+                    style={{ backgroundColor: '#e8e6dc' }}
+                  >
+                    <div className="text-sm font-medium mb-2" style={{ color: '#141413' }}>{item.name}</div>
+                    <div className="flex justify-between text-xs mb-1" style={{ color: '#5e5d59' }}>
                       <span>熵值 H</span>
                       <span>{item.entropy.toFixed(3)}</span>
                     </div>
-                    <div className="h-1.5 bg-gray-200 rounded overflow-hidden mb-2">
-                      <div className="h-full bg-amber-400 rounded" style={{ width: `${item.entropy * 100}%` }} />
+                    <div className="h-1.5 rounded overflow-hidden mb-2" style={{ backgroundColor: '#d1cfc5' }}>
+                      <div 
+                        className="h-full rounded" 
+                        style={{ width: `${item.entropy * 100}%`, backgroundColor: '#d97757' }} 
+                      />
                     </div>
-                    <div className="flex justify-between text-xs text-gray-500">
+                    <div className="flex justify-between text-xs" style={{ color: '#5e5d59' }}>
                       <span>效用值 D</span>
-                      <span className="text-green-600 font-medium">{D.toFixed(3)}</span>
+                      <span className="font-medium" style={{ color: '#16a34a' }}>{D.toFixed(3)}</span>
                     </div>
                   </div>
                 );
@@ -216,37 +279,44 @@ export default function EWMCalculationViewer({
             </div>
           </div>
 
-          {/* 公式说明 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-3 bg-blue-50 rounded-lg text-xs">
+            <div 
+              className="p-3 rounded-xl text-xs"
+              style={{ backgroundColor: '#fef3ee', color: '#5e5d59' }}
+            >
               <strong>标准化公式：</strong>
-              <code className="block mt-1 text-blue-700">x̃ = (x - min) / (max - min)</code>
+              <code className="block mt-1" style={{ color: '#c96442' }}>x̃ = (x - min) / (max - min)</code>
             </div>
-            <div className="p-3 bg-amber-50 rounded-lg text-xs">
+            <div 
+              className="p-3 rounded-xl text-xs"
+              style={{ backgroundColor: '#fef3ee', color: '#5e5d59' }}
+            >
               <strong>熵权公式：</strong>
-              <code className="block mt-1 text-amber-700">w = (1-H) / Σ(1-H)</code>
+              <code className="block mt-1" style={{ color: '#c96442' }}>w = (1-H) / Σ(1-H)</code>
             </div>
           </div>
 
-          {/* 原始数据预览 */}
           <div>
-            <h5 className="text-sm font-medium text-gray-600 mb-3">原始数据预览（前5项）</h5>
+            <h5 className="text-sm font-medium mb-3" style={{ color: '#4d4c48' }}>原始数据预览（前5项）</h5>
             <div className="overflow-x-auto">
               <table className="min-w-full text-xs">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-3 py-2 text-left">项目</th>
+                <thead>
+                  <tr style={{ backgroundColor: '#e8e6dc' }}>
+                    <th className="px-3 py-2 text-left" style={{ color: '#5e5d59' }}>项目</th>
                     {dimensions.map(dim => (
-                      <th key={dim.id} className="px-3 py-2 text-center">{dim.name}</th>
+                      <th key={dim.id} className="px-3 py-2 text-center" style={{ color: '#5e5d59' }}>{dim.name}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody>
                   {projects.slice(0, 5).map((project, i) => (
-                    <tr key={project.id}>
-                      <td className="px-3 py-2 font-medium">{project.name}</td>
+                    <tr 
+                      key={project.id}
+                      style={{ borderBottom: '1px solid #f0eee6' }}
+                    >
+                      <td className="px-3 py-2 font-medium" style={{ color: '#141413' }}>{project.name}</td>
                       {dimensionIds.map((dimId, j) => (
-                        <td key={dimId} className="px-3 py-2 text-center text-gray-600">
+                        <td key={dimId} className="px-3 py-2 text-center" style={{ color: '#5e5d59' }}>
                           {rawMatrix[i][j].toFixed(2)}
                         </td>
                       ))}
